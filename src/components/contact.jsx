@@ -61,8 +61,8 @@ const Contact = () => {
         {/* 2. CONTACT INFO TILES - EXPANDED */}
         <div className="info-grid-premium reveal">
           {[
-            { title: 'Visit Our Store', detail: 'Gandhi Road, Heritage Block, City Center' },
-            { title: 'Reach Out via Call', detail: '+91 94055 15667' },
+            { title: 'Visit Our Store', detail: ' Kavach Akde Basement , Gandhi Road Akola' },
+            { title: 'Reach Out via Call', detail: '+91 94055 15667 , +91 8087953785' },
             { title: 'Send an Email', detail: 'support@darshanbaghouse.com' }
           ].map((info, i) => (
             <div key={i} className="info-box-premium">

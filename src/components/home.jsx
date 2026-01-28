@@ -61,7 +61,7 @@ const Home = () => {
       {/* WELCOME TEXT WITH ANIMATION */}
       <section className="welcome-section">
         <div className="welcome-container">
-          <h1 className="welcome-text">Where every journey begins with the right bag.</h1>
+          <h1 className="welcome-text">Where every journey begins with the right bag From custom designs to large-scale orders  crafted to meet every requirement.</h1>
         </div>
       </section>
 
