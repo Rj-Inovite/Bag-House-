@@ -1,0 +1,143 @@
+:root {
+  --rich-brown: #3e2723;
+  --soft-brown: #5d4037;
+  --pure-white: #ffffff;
+  --gold-tint: #d4af37;
+}
+
+.main-footer {
+  background-color: var(--pure-white);
+  color: var(--rich-brown);
+  padding: 60px 0 20px 0;
+  border-top: 1px solid rgba(62, 39, 35, 0.1);
+  font-family: 'Playfair Display', serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 5%;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Brand Styling */
+.footer-brand {
+  flex: 1.5;
+  min-width: 250px;
+}
+
+.footer-logo {
+  font-size: 1.8rem;
+  color: var(--rich-brown);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.footer-tagline {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--soft-brown);
+  margin-bottom: 20px;
+}
+
+.footer-divider {
+  width: 50px;
+  height: 2px;
+  background-color: var(--gold-tint);
+}
+
+/* Links Styling */
+.footer-links {
+  flex: 1;
+}
+
+.footer-links h4, .footer-contact h4 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: var(--rich-brown);
+  border-bottom: 2px solid var(--gold-tint);
+  display: inline-block;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--soft-brown);
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: var(--gold-tint);
+  padding-left: 8px;
+}
+
+/* WhatsApp & Contact Section */
+.footer-contact {
+  flex: 1.5;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  background-color: var(--rich-brown);
+  color: var(--pure-white) !important;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: 0.4s;
+  box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+}
+
+.whatsapp-btn:hover {
+  background-color: var(--soft-brown);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(62, 39, 35, 0.2);
+}
+
+.phone-display {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(62, 39, 35, 0.05);
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-divider {
+    margin: 0 auto;
+  }
+
+  .footer-links a:hover {
+    padding-left: 0;
+  }
+}

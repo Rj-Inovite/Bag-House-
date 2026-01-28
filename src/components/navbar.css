@@ -1,0 +1,163 @@
+:root {
+  --primary-white: #ffffff;
+  --deep-brown: #3e2723;
+  --gold-highlight: #d4af37;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Entrance Animation */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-down {
+  animation: fadeDown 0.8s ease-out forwards;
+}
+
+.navbar {
+  background-color: var(--primary-white);
+  height: 70px; /* Slightly thicker for better presence */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+  border-bottom: 2px solid var(--deep-brown);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.nav-container {
+  width: 95%;
+  max-width: 1000px; /* Reduced max-width to bring items closer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.nav-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px; /* Adjust this gap to control how close items are to the logo */
+}
+
+.nav-group {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--deep-brown);
+  font-weight: 700; /* Bolder text */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: var(--transition);
+  position: relative;
+}
+
+/* Enhanced Underline Animation */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  background-color: var(--gold-highlight);
+  transition: var(--transition);
+  transform: translateX(-50%);
+}
+
+.nav-item:hover {
+  color: var(--gold-highlight);
+  transform: translateY(-2px);
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* Logo Styling */
+.oval-logo {
+  width: 140px; /* Wider for "DARSHAN" */
+  height: 55px;
+  background-color: var(--deep-brown);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.logo-text {
+  color: var(--gold-highlight); /* Gold text on brown looks premium */
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+}
+
+.oval-logo:hover {
+  background-color: var(--deep-brown);
+  border-color: var(--gold-highlight);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: scale(1.08) rotate(2deg);
+}
+
+/* Mobile Responsiveness */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+}
+
+.bar {
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: var(--deep-brown);
+  transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+  .nav-content-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-group {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background-color: var(--primary-white);
+    width: 100%;
+    text-align: center;
+    transition: 0.4s ease;
+    padding: 40px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    gap: 30px;
+  }
+
+  .nav-group.active {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .bar.open:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .bar.open:nth-child(2) { opacity: 0; }
+  .bar.open:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
