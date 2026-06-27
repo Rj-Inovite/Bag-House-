@@ -1,305 +1,744 @@
+/* ==========================================================================
+   LUXURY DESIGN SYSTEM STYLING DICTIONARY (CSS VARIABLES)
+   ========================================================================== */
 :root {
-  --deep-brown: #3e2723;
-  --gold: #d4af37;
-  --cream: #fffdfa;
-  --border-thin: 1px solid #3e2723;
+  /* Ultra Luxury Core Colors */
+  --clr-blush-pink: #ff5fa2;
+  --clr-rose-gold: linear-gradient(135deg, #b76e79 0%, #fad0c4 50%, #ffd1ff 100%);
+  --clr-pearl-white: #ffffff;
+  --clr-champagne-gold: #f4e0c4;
+  --clr-warm-beige: #f9f2ed;
+  --clr-cream: #fffdfa;
+  --clr-lavender: #f3efff;
+  --clr-dark-royal: #1c1517;
+  
+  /* Luxury Shadows */
+  --shd-premium-glow: 0 15px 35px rgba(255, 95, 162, 0.15);
+  --shd-gold-glow: 0 15px 35px rgba(244, 224, 196, 0.25);
+  --shd-card-lift: 0 30px 60px rgba(44, 30, 35, 0.08);
+  --shd-glass: 0 8px 32px 0 rgba(183, 110, 121, 0.07);
+
+  /* Font Architectures */
+  --font-royal: 'Playfair Display', serif;
+  --font-script: 'Parisienne', 'Great Vibes', cursive;
+  --font-body: 'Montserrat', sans-serif;
+  
+  /* Core Animation Curve */
+  --luxe-transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ==========================================================================
+   CORE PLATFORM RESETS & UNIVERSAL MOTION BASE
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: var(--cream);
-  color: var(--deep-brown);
-  font-family: 'Georgia', serif;
+  background-color: var(--clr-cream);
+  color: var(--clr-dark-royal);
+  overflow-x: hidden;
+  font-family: var(--font-body);
 }
 
-/* Scroll Animation Engine */
-.reveal-section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease-out;
+/* Scrollbar Engineering */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
+::-webkit-scrollbar-track {
+  background: var(--clr-cream);
 }
-
-/* NEW TOP VIDEO BANNER SECTION */
-.top-video-banner {
-  width: 100%;
-  height: 80vh;
-  overflow: hidden;
-  position: relative;
-  background-color: #000;
-}
-
-.video-container {
-  width: 100%;
-  height: 100%;
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.7;
-}
-
-.video-overlay-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
-  z-index: 2;
-}
-
-.video-overlay-text h2 {
-  font-size: 4rem;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-}
-
-/* Welcome Section */
-.welcome-section {
-  padding: 80px 5% 40px;
-  text-align: center;
-  background-color: var(--cream);
-}
-
-.welcome-text {
-  color: var(--deep-brown);
-  font-size: 3rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  animation: fadeInUp 2s ease-out, glow 2s ease-in-out infinite alternate;
-}
-
-/* Product Carousel (3 Items) */
-.product-carousel {
-  padding: 60px 5%;
-  overflow: hidden;
-}
-
-.carousel-track {
-  display: flex;
-  gap: 30px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 20px;
-}
-
-.carousel-item {
-  min-width: calc(33.33% - 20px);
-  text-align: center;
-  cursor: pointer;
-}
-
-.shape-container {
-  height: 350px;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  overflow: hidden;
-  border: var(--border-thin);
-  transition: 0.5s;
-}
-
-.carousel-item:hover .shape-container {
+::-webkit-scrollbar-thumb {
+  background: #f1b7cc;
   border-radius: 10px;
-  transform: scale(0.95);
 }
 
-.carousel-item img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-
-/* Banner */
-.banner-image {
-  height: 500px;
-  background: url('https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1200') center/cover;
-  margin: 50px 5%;
-  border: var(--border-thin);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.banner-overlay h2 {
-  color: white;
-  font-size: 3rem;
-  background: rgba(62, 39, 35, 0.7);
-  padding: 20px 40px;
-}
-
-/* About Us */
-.about-us {
-  padding: 100px 15%;
+/* ==========================================================================
+   GLOBAL REUSABLE TYPOGRAPHY ELEMENTS & BUTTON MODULES
+   ========================================================================== */
+.global-header {
   text-align: center;
+  margin-bottom: 70px;
 }
 
-.about-theory {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  font-style: italic;
-  margin-top: 30px;
-}
-
-.gold-title {
-  color: var(--gold);
+.section-pre {
+  font-size: 0.85rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 4px;
+  color: var(--clr-blush-pink);
+  margin-bottom: 12px;
+  display: block;
 }
 
-/* Stats */
-.stats-highlight {
-  display: flex;
-  justify-content: space-around;
-  background: var(--deep-brown);
-  color: var(--gold);
-  padding: 60px 0;
+.section-heading {
+  font-family: var(--font-royal);
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--clr-dark-royal);
+  letter-spacing: -0.5px;
 }
 
-.stat-number { font-size: 3.5rem; margin: 0; }
-
-/* Best Seller Grid */
-.seller-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  padding: 0 5%;
+.section-paragraph {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #5a4b4e;
 }
 
-.square-item {
-  position: relative;
-  aspect-ratio: 1/1;
-  border: var(--border-thin);
-  overflow: hidden;
-}
-
-.square-item img { width: 100%; height: 100%; object-fit: cover; }
-
-.label-overlay {
-  position: absolute;
-  bottom: 0; background: var(--deep-brown);
-  color: var(--gold); width: 100%; padding: 10px; text-align: center;
-}
-
-/* Gender Section (Him/Her) */
-.gender-curation {
-  display: flex;
-  gap: 40px;
-  padding: 100px 5%;
-  justify-content: center;
-}
-
-.gender-box {
-  width: 400px;
-  cursor: pointer;
-}
-
-.label-box {
-  background: var(--deep-brown);
-  color: var(--gold);
-  text-align: center;
-  padding: 15px;
-  font-weight: bold;
+/* Button Systems */
+.luxe-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
   letter-spacing: 2px;
-  border: 1px solid var(--gold);
-}
-
-.gender-img-wrapper {
-  height: 500px;
-  border: var(--border-thin);
-  margin-top: 10px;
-  transition: 0.6s;
-  background-size: cover;
-}
-
-.gender-box:hover .gender-img-wrapper {
-  transform: scale(0.98);
-  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.2);
-}
-
-.him { background-image: url('https://cdn.shopify.com/s/files/1/0716/2344/2651/files/carriercaddylifestyleimage1.webp?v=1749152523'); }
-.her { background-image: url('https://m.media-amazon.com/images/I/81dhp90ZlEL._AC_UY1000_.jpg'); }
-
-/* Leather Craft Section (Fixed Image) */
-.craft-container {
-  display: flex;
-  background: #f4f1eb;
-  padding: 80px 10%;
-  align-items: center;
-  gap: 50px;
-}
-
-.craft-visual {
-  flex: 1; 
-  height: 450px;
-  border: var(--border-thin);
+  padding: 16px 36px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--luxe-transition);
+  position: relative;
   overflow: hidden;
 }
 
-.craft-img-fixed {
+.luxe-btn--glow {
+  background: linear-gradient(135deg, #ff5fa2 0%, #ff8da1 100%);
+  color: var(--clr-pearl-white);
+  border: none;
+  box-shadow: var(--shd-premium-glow);
+}
+
+.luxe-btn--glow:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 20px 40px rgba(255, 95, 162, 0.4);
+}
+
+.luxe-btn--border {
+  background: transparent;
+  color: var(--clr-dark-royal);
+  border: 1px solid #d4af37; /* Gold Accent */
+}
+
+.luxe-btn--border:hover {
+  background: #d4af37;
+  color: var(--clr-pearl-white);
+  box-shadow: var(--shd-gold-glow);
+  transform: translateY(-4px);
+}
+
+.luxe-btn--dark-glow {
+  background: var(--clr-dark-royal);
+  color: var(--clr-pearl-white);
+  border: none;
+}
+
+.luxe-btn--dark-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(28, 21, 23, 0.3);
+}
+
+/* ==========================================================================
+   AMBIENT BACKGROUND ENGINE (KEYFRAMES FOR MAGIC SPARKLES)
+   ========================================================================== */
+.ambient-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Customer Reviews (4 in single row, square shape) */
-.reviews-grid-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: floatSparkle 12s infinite ease-in-out;
+}
+
+.sparkle:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+.sparkle:nth-child(2) { top: 45%; right: 15%; animation-delay: 3s; }
+.sparkle:nth-child(3) { top: 75%; left: 25%; animation-delay: 6s; }
+
+@keyframes floatSparkle {
+  0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.2; }
+  50% { transform: translateY(-100px) scale(1.4); opacity: 0.8; }
+}
+
+/* ==========================================================================
+   SECTION 1: LUXURY HERO BANNER (100VH CINEMATIC SLIDER)
+   ========================================================================== */
+.luxe-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.luxe-hero__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  z-index: -1;
+}
+
+/* Ken Burns Effect Engine */
+.luxe-hero__slide--active {
+  opacity: 1;
+  animation: kenBurns 6s ease-out forwards;
+}
+
+.luxe-hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28, 21, 23, 0.45); /* High readability tint */
+}
+
+.luxe-hero__content-container {
+  max-width: 850px;
+  padding: 0 24px;
+  color: var(--clr-pearl-white);
+  z-index: 10;
+}
+
+.luxe-hero__subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--clr-champagne-gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.luxe-hero__title {
+  font-family: var(--font-royal);
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.title-script {
+  font-family: var(--font-script);
+  color: #ffb6d3;
+  font-size: 6rem;
+  text-transform: none;
+}
+
+.luxe-hero__desc {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 40px;
+  color: var(--clr-lavender);
+}
+
+.luxe-hero__actions {
+  display: flex;
+  justify-content: center;
   gap: 20px;
-  padding: 20px 5% 80px;
 }
 
-.review-square-card {
-  aspect-ratio: 1/1;
-  border: var(--border-thin);
-  background: white;
+/* Slider Controls Styles */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 3.5rem;
+  cursor: pointer;
+  z-index: 15;
+  transition: var(--luxe-transition);
+}
+.slider-arrow:hover { color: var(--clr-pearl-white); }
+.arrow-left { left: 40px; }
+.arrow-right { right: 40px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  gap: 12px;
+  z-index: 15;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: var(--luxe-transition);
+}
+
+.dot--active {
+  background: var(--clr-blush-pink);
+  transform: scale(1.5);
+  box-shadow: 0 0 10px var(--clr-blush-pink);
+}
+
+/* Scroll Animation Icon */
+.scroll-indicator {
+  position: absolute;
+  bottom: 80px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  text-align: center;
-  transition: 0.3s;
+  z-index: 10;
 }
 
-.review-square-card:hover {
-  background-color: var(--deep-brown);
-  color: var(--cream);
+.mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--clr-pearl-white);
+  border-radius: 20px;
+  position: relative;
 }
 
-.centered-title {
-  text-align: center;
-  font-size: 2.5rem;
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--clr-pearl-white);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollMouse 1.5s infinite ease-in-out;
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+@keyframes scrollMouse {
+  0% { top: 6px; opacity: 1; }
+  100% { top: 20px; opacity: 0; }
+}
+
+/* ==========================================================================
+   SECTION 2: WELCOME SECTION STYLING MATRIX
+   ========================================================================== */
+.welcome {
+  padding: 140px 80px;
+  background-color: var(--clr-pearl-white);
+}
+
+.welcome__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.welcome__img-frame {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: var(--shd-card-lift);
+  animation: smoothFloat 5s infinite ease-in-out;
+}
+
+.welcome__img-frame img {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  transition: var(--luxe-transition);
+}
+
+.welcome__img-frame:hover img {
+  transform: scale(1.05);
+}
+
+.welcome__right .section-heading {
   margin-bottom: 30px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
+.welcome__stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 50px;
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 5px rgba(62, 39, 35, 0.5); }
-  to { text-shadow: 0 0 20px rgba(62, 39, 35, 0.8); }
+.stat-unit h3 {
+  font-family: var(--font-royal);
+  font-size: 3.2rem;
+  color: var(--clr-blush-pink);
+  font-weight: 400;
 }
 
-/* Mobile Adjustments */
-@media (max-width: 992px) {
-  .reviews-grid-row { grid-template-columns: 1fr 1fr; }
-  .carousel-item { min-width: 45%; }
+.stat-unit p {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #7a6b6e;
+  margin-top: 5px;
 }
 
-@media (max-width: 768px) {
-  .reviews-grid-row { grid-template-columns: 1fr; }
-  .carousel-item { min-width: 80%; }
-  .seller-grid { grid-template-columns: 1fr 1fr; }
-  .gender-box { width: 100%; }
-  .craft-container { flex-direction: column; }
-  .welcome-text { font-size: 2rem; }
-  .top-video-banner { height: 50vh; }
+@keyframes smoothFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
+
+/* ==========================================================================
+   SECTION 3: OUR PREMIUM SERVICES (6 GLASSMORPHISM CARDS)
+   ========================================================================== */
+.services-grid {
+  padding: 140px 80px;
+  background-color: var(--clr-warm-beige);
+}
+
+.services-grid__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.service-luxe-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shd-glass);
+  transition: var(--luxe-transition);
+}
+
+.service-luxe-card__visual {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.service-luxe-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--luxe-transition);
+}
+
+.service-luxe-card__icon {
+  position: absolute;
+  bottom: -20px;
+  left: 30px;
+  background: var(--clr-pearl-white);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.service-luxe-card__body {
+  padding: 45px 35px 35px 35px;
+}
+
+.service-luxe-card__body h3 {
+  font-family: var(--font-royal);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.service-luxe-card__body p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #6a5a5d;
+  margin-bottom: 25px;
+}
+
+.card-inline-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: var(--clr-dark-royal);
+  transition: var(--luxe-transition);
+}
+
+/* Hover Interaction Sequences */
+.service-luxe-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shd-card-lift);
+  border-color: rgba(255, 95, 162, 0.3);
+}
+
+.service-luxe-card:hover .service-luxe-card__visual img {
+  transform: scale(1.08);
+}
+
+.service-luxe-card:hover .card-inline-btn {
+  color: var(--clr-blush-pink);
+}
+
+/* ==========================================================================
+   SECTION 4: WHY CHOOSE US
+   ========================================================================== */
+.why-us {
+  padding: 120px 80px;
+  background-color: #fff9fa; /* Soft blush tint */
+}
+
+.why-us__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.why-us__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.why-card {
+  background: var(--clr-pearl-white);
+  padding: 45px 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: var(--shd-glass);
+  transition: var(--luxe-transition);
+}
+
+.why-card__badge {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.why-card h3 {
+  font-family: var(--font-royal);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.why-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #7a6a6d;
+}
+
+.why-card:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: var(--shd-card-lift);
+}
+
+/* ==========================================================================
+   SECTION 5: OUR PREMIUM COLLECTION
+   ========================================================================== */
+.premium-collection {
+  padding: 140px 80px;
+  background-color: var(--clr-pearl-white);
+}
+
+.premium-collection__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.horizontal-luxe-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  background: var(--clr-warm-beige);
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: var(--shd-card-lift);
+}
+
+.horizontal-luxe-card__img-side {
+  position: relative;
+  height: 450px;
+}
+
+.horizontal-luxe-card__img-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.horizontal-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 40%, rgba(249,242,237,1) 100%);
+}
+
+.horizontal-luxe-card__content-side {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.horizontal-luxe-card__content-side h3 {
+  font-family: var(--font-royal);
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.horizontal-luxe-card__content-side p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5a4a4d;
+  margin-bottom: 35px;
+}
+
+/* ==========================================================================
+   SECTION 6: BRIDAL MAKEOVER GALLERY (MASONRY)
+   ========================================================================== */
+.masonry-gallery {
+  padding: 140px 80px;
+  background-color: var(--clr-cream);
+}
+
+.masonry-gallery__grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  column-count: 4;
+  column-gap: 25px;
+}
+
+.masonry-item {
+  position: relative;
+  margin-bottom: 25px;
+  border-radius: 16px;
+  overflow: hidden;
+  break-inside: avoid;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+  transition: var(--luxe-transition);
+}
+
+.masonry-item img {
+  width: 100%;
+  display: block;
+  transition: var(--luxe-transition);
+}
+
+.masonry-item__hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 95, 162, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--luxe-transition);
+  backdrop-filter: blur(4px);
+}
+
+.masonry-item__hover-overlay span {
+  color: var(--clr-pearl-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid white;
+  padding-bottom: 4px;
+}
+
+.masonry-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shd-card-lift);
+}
+
+.masonry-item:hover img { transform: scale(1.05); }
+.masonry-item:hover .masonry-item__hover-overlay { opacity: 1; }
+
+/* Lightbox Modal */
+.luxe-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(28, 21, 23, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 40px;
+}
+
+.luxe-modal img {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.luxe-modal__close {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   SECTION 7: TESTIMONIALS (GLASSMORPHISM)
+   ========================================================================== */
+.testimonials-section {
+  padding: 140px 80px;
+  background: linear-gradient(135deg, #1c1517 0%, #2d2024 100%);
+}
+
+.testimonials-section__wrapper {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 380px;
+}
+
+.testimonial-luxe-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 60px;

@@ -1,143 +1,322 @@
-:root {
-  --rich-brown: #3e2723;
-  --soft-brown: #5d4037;
-  --pure-white: #ffffff;
-  --gold-tint: #d4af37;
-}
-
-.main-footer {
-  background-color: var(--pure-white);
-  color: var(--rich-brown);
-  padding: 60px 0 20px 0;
-  border-top: 1px solid rgba(62, 39, 35, 0.1);
-  font-family: 'Playfair Display', serif;
+/* ==========================================================================
+   LUXURY FOOTER DESIGN SYSTEM CONFIGURATION
+   ========================================================================== */
+.luxe-footer {
+  background-color: #150a0d; /* Ultra deep, premium royal maroon-tinted black */
+  color: rgba(255, 255, 255, 0.7);
+  padding: 100px 80px 0 80px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  border-top: 1px solid rgba(216, 165, 174, 0.15); /* Delicate rose gold top trace line */
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 70px;
+}
+
+/* Background Ambient Luxury Light Burst */
+.footer-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(106, 16, 40, 0.2) 0%, rgba(0,0,0,0) 70%);
+  bottom: -150px;
+  right: -100px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   COLUMN STYLE SPECS
+   ========================================================================== */
+.footer-column {
+  position: relative;
+  z-index: 5;
+}
+
+.footer-heading {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Simple underlying gold geometric dash indicator */
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 30px;
+  height: 1px;
+  background-color: #C8A96A; /* Champagne gold */
+}
+
+/* Brand Ateliers Design Element */
+.footer-brand-logo {
+  font-family: 'Parisienne', 'Great Vibes', cursive;
+  font-size: 3rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: linear-gradient(135deg, #ff5fa2 0%, #D8A5AE 50%, #C8A96A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+}
+
+.footer-brand-logo:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 10px rgba(216, 165, 174, 0.4));
+}
+
+.brand-description {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 30px;
+  max-width: 340px;
+}
+
+/* Premium Social Ring Connectors */
+.footer-social-wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.icon-platform {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #C8A96A;
+  letter-spacing: 0.5px;
+}
+
+.social-icon-link:hover {
+  background-color: var(--clr-blush-pink, #FDF2F6);
+  border-color: #ff5fa2;
+  transform: translateY(-4px);
+  box-shadow: 0 5px 15px rgba(232, 62, 109, 0.3);
+}
+
+.social-icon-link:hover .icon-platform {
+  color: #6B1028; /* Deep Maroon contrast adjustment */
+}
+
+/* Links List Utilities */
+.footer-links-list {
+  list-style: none;
+}
+
+.footer-links-list li {
+  margin-bottom: 15px;
+}
+
+.footer-links-list a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  display: inline-block;
+}
+
+.footer-links-list a:hover {
+  color: #ff5fa2;
+  transform: translateX(6px);
+}
+
+/* Contact List Layout Grid */
+.footer-contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.contact-prefix {
+  font-size: 1.1rem;
+}
+
+.footer-contact-list p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Newsletter Input Components Form mapping */
+.newsletter-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 25px;
+}
+
+.footer-newsletter-form {
+  width: 100%;
+}
+
+.footer-input-group {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.footer-input-group:focus-within {
+  border-color: #ff5fa2;
+}
+
+.footer-input-group input {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  width: 100%;
+  outline: none;
+}
+
+.footer-input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-submit-btn {
+  background: transparent;
+  border: none;
+  color: #C8A96A;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.footer-submit-btn span {
+  transition: transform 0.3s ease;
+}
+
+.footer-submit-btn:hover {
+  color: #ff5fa2;
+}
+
+.footer-submit-btn:hover span {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   METADATA BOTTOM BAR
+   ========================================================================== */
+.footer-bottom-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 35px 0;
+  margin-top: 20px;
+}
+
+.footer-bottom-container {
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 0 5%;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-
-/* Brand Styling */
-.footer-brand {
-  flex: 1.5;
-  min-width: 250px;
-}
-
-.footer-logo {
-  font-size: 1.8rem;
-  color: var(--rich-brown);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.footer-tagline {
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--soft-brown);
-  margin-bottom: 20px;
-}
-
-.footer-divider {
-  width: 50px;
-  height: 2px;
-  background-color: var(--gold-tint);
-}
-
-/* Links Styling */
-.footer-links {
-  flex: 1;
-}
-
-.footer-links h4, .footer-contact h4 {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  color: var(--rich-brown);
-  border-bottom: 2px solid var(--gold-tint);
-  display: inline-block;
-}
-
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links li {
-  margin-bottom: 10px;
-}
-
-.footer-links a {
-  text-decoration: none;
-  color: var(--soft-brown);
-  transition: 0.3s;
-  font-weight: 500;
-}
-
-.footer-links a:hover {
-  color: var(--gold-tint);
-  padding-left: 8px;
-}
-
-/* WhatsApp & Contact Section */
-.footer-contact {
-  flex: 1.5;
-}
-
-.whatsapp-btn {
-  display: inline-block;
-  background-color: var(--rich-brown);
-  color: var(--pure-white) !important;
-  padding: 12px 25px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  margin-top: 15px;
-  transition: 0.4s;
-  box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
-}
-
-.whatsapp-btn:hover {
-  background-color: var(--soft-brown);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(62, 39, 35, 0.2);
-}
-
-.phone-display {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-/* Bottom Copyright Bar */
-.footer-bottom {
-  text-align: center;
-  margin-top: 50px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(62, 39, 35, 0.05);
+  align-items: center;
   font-size: 0.85rem;
-  color: #888;
+  color: rgba(255, 255, 255, 0.35);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
+.footer-bottom-legal {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-bottom-legal a {
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom-legal a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.legal-divider {
+  font-size: 0.6rem;
+  color: rgba(200, 169, 106, 0.3);
+}
+
+/* ==========================================================================
+   MOTION ENGINE: OBSERVER REVEAL KEYFRAMES
+   ========================================================================== */
+.footer-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.footer-reveal--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSION ADAPTABILITY BREAKPOINT LAYOUT MAPPING
+   ========================================================================== */
+@media (max-width: 1200px) {
   .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .luxe-footer {
+    padding: 80px 40px 0 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .luxe-footer {
+    padding: 60px 24px 0 24px;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding-bottom: 50px;
+  }
+  .footer-bottom-container {
     flex-direction: column;
     text-align: center;
-  }
-  
-  .footer-divider {
-    margin: 0 auto;
-  }
-
-  .footer-links a:hover {
-    padding-left: 0;
+    gap: 20px;
   }
 }

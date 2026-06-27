@@ -4,6 +4,8 @@ import Home from './components/home'
 import Shop from './components/shop'
 import Contact from './components/contact'
 import Footer from './components/footer'
+import React from 'react'
+import Premium from './components/premium'
 import './App.css'
 
 function App() {

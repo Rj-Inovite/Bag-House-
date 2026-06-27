@@ -1,163 +1,369 @@
+/* ==========================================================================
+   LUXURY NAVBAR DESIGN SYSTEM (CSS VARIABLES)
+   ========================================================================== */
 :root {
-  --primary-white: #ffffff;
-  --deep-brown: #3e2723;
-  --gold-highlight: #d4af37;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-elegant: 'Playfair Display', 'Great Vibes', 'Parisienne', cursive; /* Fallbacks for handwritten/luxury feel */
+  --font-sans: 'Montserrat', 'Inter', sans-serif;
+  
+  /* Color Palette */
+  --clr-pink: #ff5fa2;
+  --clr-rose-gold-light: #fad0c4;
+  --clr-rose-gold-dark: #ffd1ff;
+  --clr-text-dark: #2c2c2c;
+  --clr-text-light: #ffffff;
+  --clr-bg-glass: rgba(255, 255, 255, 0.15);
+  --clr-bg-scrolled: rgba(255, 255, 255, 0.92);
+  
+  /* Gradients */
+  --grad-logo: linear-gradient(135deg, #ff5fa2 0%, #e0a3b7 50%, #fcd4db 100%);
+  --grad-btn: linear-gradient(135deg, #ff5fa2 0%, #ff8da1 100%);
+  --grad-btn-hover: linear-gradient(135deg, #ff8da1 0%, #ff5fa2 100%);
+
+  /* Animations & Shadows */
+  --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.03);
+  --shadow-scrolled: 0 10px 40px rgba(255, 95, 162, 0.08);
+  --shadow-btn-glow: 0 0 15px rgba(255, 95, 162, 0.4);
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Entrance Animation */
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Base resets for navbar structural integrity */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.fade-down {
-  animation: fadeDown 0.8s ease-out forwards;
-}
-
+/* ==========================================================================
+   NAVBAR CORE STYLES
+   ========================================================================== */
 .navbar {
-  background-color: var(--primary-white);
-  height: 70px; /* Slightly thicker for better presence */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 2000;
-  border-bottom: 2px solid var(--deep-brown);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.nav-container {
-  width: 95%;
-  max-width: 1000px; /* Reduced max-width to bring items closer */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.nav-content-wrapper {
+  height: 90px;
+  padding: 25px 80px;
+  background-color: var(--clr-bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-soft);
+  z-index: 1000;
+  transition: var(--transition-smooth);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 50px; /* Adjust this gap to control how close items are to the logo */
 }
 
-.nav-group {
+/* Scrolled State via Scroll Event listener */
+.navbar--scrolled {
+  background-color: var(--clr-bg-scrolled);
+  height: 80px;
+  box-shadow: var(--shadow-scrolled);
+  border-bottom: 1px solid rgba(255, 95, 162, 0.1);
+}
+
+.navbar__container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
   align-items: center;
 }
 
-.nav-item {
+/* ==========================================================================
+   LEFT SIDE: LOGO STYLE & ANIMATIONS
+   ========================================================================== */
+.navbar__logo-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navbar__logo {
+  font-family: var(--font-elegant);
+  font-size: 2.3rem;
+  font-weight: 600;
   text-decoration: none;
-  color: var(--deep-brown);
-  font-weight: 700; /* Bolder text */
-  font-size: 1rem;
+  letter-spacing: 1px;
+  background: var(--grad-logo);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  
+  /* Logo Fade-In entry animation */
+  animation: logoFadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  opacity: 0;
+}
+
+.navbar__logo:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 8px rgba(255, 95, 162, 0.3));
+}
+
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   CENTER: LINKS & HOVER EFFECT
+   ========================================================================== */
+.navbar__menu-wrapper {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__links {
+  display: flex;
+  list-style: none;
+  gap: 45px;
+}
+
+/* Staggered Fade-Up Entry Animation for Links */
+.navbar__item {
+  animation: linkFadeUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  animation-delay: calc(var(--item-index) * 0.15s);
+  opacity: 0;
+}
+
+.navbar__link {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  transition: var(--transition);
+  color: var(--clr-text-dark);
+  text-decoration: none;
   position: relative;
+  padding: 8px 0;
+  transition: var(--transition-smooth);
 }
 
-/* Enhanced Underline Animation */
-.nav-item::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 50%;
-  background-color: var(--gold-highlight);
-  transition: var(--transition);
-  transform: translateX(-50%);
-}
-
-.nav-item:hover {
-  color: var(--gold-highlight);
+/* Hover/Interaction Aesthetics */
+.navbar__link:hover {
+  color: var(--clr-pink);
   transform: translateY(-2px);
 }
 
-.nav-item:hover::after {
+/* Animated underline growing from center */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--clr-pink);
+  transition: var(--transition-smooth);
+  transform: translateX(-50%);
+}
+
+.navbar__link:hover::after {
   width: 100%;
 }
 
-/* Logo Styling */
-.oval-logo {
-  width: 140px; /* Wider for "DARSHAN" */
-  height: 55px;
-  background-color: var(--deep-brown);
-  border-radius: 50px;
+/* Active Page State */
+.navbar__link--active,
+.navbar__link.active { /* Integrates seamlessly with NavLink active logic */
+  color: var(--clr-pink) !important;
+  font-weight: 700;
+}
+
+.navbar__link--active::after,
+.navbar__link.active::after {
+  width: 100%;
+}
+
+@keyframes linkFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RIGHT SIDE: CTA BUTTON STYLES
+   ========================================================================== */
+.navbar__actions {
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  transition: var(--transition);
+}
+
+.navbar__btn {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--clr-text-light);
+  background: var(--grad-btn);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
   cursor: pointer;
-  border: 2px solid transparent;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden; /* Captures modern ripple aura effect */
+  transition: var(--transition-smooth);
+  z-index: 1;
 }
 
-.logo-text {
-  color: var(--gold-highlight); /* Gold text on brown looks premium */
-  font-weight: 900;
-  font-size: 1.1rem;
-  letter-spacing: 3px;
+/* Hover states with Scale, Glow, and Pseudo Ripple */
+.navbar__btn:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-btn-glow);
+  background: var(--grad-btn-hover);
 }
 
-.oval-logo:hover {
-  background-color: var(--deep-brown);
-  border-color: var(--gold-highlight);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-  transform: scale(1.08) rotate(2deg);
-}
-
-/* Mobile Responsiveness */
-.hamburger {
-  display: none;
-  cursor: pointer;
+.navbar__btn::before {
+  content: '';
   position: absolute;
-  right: 10px;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease-out, height 0.6s ease-out;
+  z-index: -1;
 }
 
-.bar {
-  display: block;
-  width: 28px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: var(--deep-brown);
-  transition: var(--transition);
+.navbar__btn:hover::before {
+  width: 300%;
+  height: 300%;
 }
 
+.navbar__mobile-cta {
+  display: none;
+}
+
+/* ==========================================================================
+   HAMBURGER / RESPONSIVE ARCHITECTURE
+   ========================================================================== */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 19px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: var(--clr-text-dark);
+  transition: var(--transition-smooth);
+  transform-origin: left;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (TABLET & MOBILE)
+   ========================================================================== */
+
+/* Tablet Spacing Reduction */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 25px 40px;
+  }
+  .navbar__links {
+    gap: 25px;
+  }
+}
+
+/* Mobile Drawer Logic */
 @media (max-width: 768px) {
-  .nav-content-wrapper {
-    flex-direction: column;
-    gap: 0;
+  .navbar {
+    padding: 20px 24px;
+    height: 80px;
   }
 
-  .nav-group {
+  .navbar__btn--desktop {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  /* Slide-in Drawer System */
+  .navbar__menu-wrapper {
     position: fixed;
-    left: -100%;
-    top: 70px;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 340px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
     flex-direction: column;
-    background-color: var(--primary-white);
+    justify-content: flex-start;
+    padding: 120px 40px 40px 40px;
+    transition: cubic-bezier(0.5, 1, 0.5, 1) 0.5s;
+  }
+
+  /* Drawer Active Class toggled via React */
+  .navbar__menu-wrapper--open {
+    right: 0;
+  }
+
+  .navbar__links {
+    flex-direction: column;
     width: 100%;
-    text-align: center;
-    transition: 0.4s ease;
-    padding: 40px 0;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    gap: 30px;
+    gap: 35px;
+    margin-bottom: 50px;
   }
 
-  .nav-group.active {
-    left: 0;
-  }
-
-  .hamburger {
+  .navbar__link {
+    font-size: 1.1rem;
     display: block;
   }
 
-  .bar.open:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  .bar.open:nth-child(2) { opacity: 0; }
-  .bar.open:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .navbar__mobile-cta {
+    display: block;
+    width: 100%;
+  }
+
+  .navbar__btn--mobile {
+    width: 100%;
+    text-align: center;
+    padding: 16px;
+  }
+
+  /* Transform Hamburger Lines into Close 'X' icon */
+  .navbar__hamburger--open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg);
+  }
+
+  .navbar__hamburger--open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .navbar__hamburger--open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg);
+  }
 }
