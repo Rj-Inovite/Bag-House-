@@ -5,7 +5,7 @@ import Shop from './components/shop'
 import Contact from './components/contact'
 import Footer from './components/footer'
 import React from 'react'
-import Premium from './components/premium'
+import Premium from './components/Premium'
 import './App.css'
 
 function App() {
@@ -15,11 +15,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/premium" element={<Premium />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </>
   )
 }
+
 
 export default App

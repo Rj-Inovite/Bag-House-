@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Footer.css';
+import './footer.css';
 
 const Footer = () => {
   // Trigger entry animation on scroll using Intersection Observer

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Home.css';
+import './home.css';
 
 // Custom Hook to count numbers upward when scrolled into view
 const useCounter = (endValue, duration = 2000, startTrigger = false) => {
