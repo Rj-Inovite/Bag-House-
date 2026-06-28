@@ -24,11 +24,31 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
+
+/* Avoid fixed navbar overlapping page content */
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-main {
+  padding-top: 100px; /* default for desktop; overridden below */
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    padding-top: 95px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding-top: 90px;
+  }
+}
+
 
 h1 {
   font-size: 3.2em;

@@ -10,18 +10,21 @@ import './App.css'
 
 function App() {
   return (
-    <>
+    <div className="app-shell">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/premium" element={<Premium />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <main className="app-main" aria-label="Page content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/premium" element={<Premium />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
       <Footer />
-    </>
+    </div>
   )
 }
 
 
 export default App
+
