@@ -1,32 +1,32 @@
 /* ==========================================================================
-   LUXURY NAVBAR DESIGN SYSTEM (CSS VARIABLES)
+   PREMIUM LUXURY NAVBAR DESIGN SYSTEM (WHITE & PINK EDITION)
    ========================================================================== */
-:root {
-  --font-elegant: 'Playfair Display', 'Great Vibes', 'Parisienne', cursive; /* Fallbacks for handwritten/luxury feel */
-  --font-sans: 'Montserrat', 'Inter', sans-serif;
-  
-  /* Color Palette */
-  --clr-pink: #ff5fa2;
-  --clr-rose-gold-light: #fad0c4;
-  --clr-rose-gold-dark: #ffd1ff;
-  --clr-text-dark: #2c2c2c;
-  --clr-text-light: #ffffff;
-  --clr-bg-glass: rgba(255, 255, 255, 0.15);
-  --clr-bg-scrolled: rgba(255, 255, 255, 0.92);
-  
-  /* Gradients */
-  --grad-logo: linear-gradient(135deg, #ff5fa2 0%, #e0a3b7 50%, #fcd4db 100%);
-  --grad-btn: linear-gradient(135deg, #ff5fa2 0%, #ff8da1 100%);
-  --grad-btn-hover: linear-gradient(135deg, #ff8da1 0%, #ff5fa2 100%);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap');
 
-  /* Animations & Shadows */
-  --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.03);
+:root {
+  /* Typography */
+  --font-elegant: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  
+  /* Redesigned White & Pink Luxury Color Palette */
+  --clr-pink-primary: #ff5fa2;
+  --clr-pink-hover: #ff8da1;
+  --clr-pink-light: #fff0f5;
+  --clr-text-dark: #1a1a1a;
+  --clr-text-muted: #555555;
+  --clr-white-pure: #ffffff;
+  
+  /* Glassmorphism States */
+  --clr-bg-glass: rgba(255, 255, 255, 0.65);
+  --clr-bg-scrolled: rgba(255, 255, 255, 0.96);
+  
+  /* Premium Shadows & Transitions */
+  --shadow-navbar: 0 4px 30px rgba(255, 95, 162, 0.04);
   --shadow-scrolled: 0 10px 40px rgba(255, 95, 162, 0.08);
-  --shadow-btn-glow: 0 0 15px rgba(255, 95, 162, 0.4);
-  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-premium: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Base resets for navbar structural integrity */
+/* Structural Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -34,37 +34,37 @@
 }
 
 /* ==========================================================================
-   NAVBAR CORE STYLES
+   NAVBAR CORE ARCHITECTURE
    ========================================================================== */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 90px;
-  padding: 25px 80px;
+  height: 100px;
+  padding: 0 100px;
   background-color: var(--clr-bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-navbar);
   z-index: 1000;
-  transition: var(--transition-smooth);
+  transition: var(--transition-premium);
   display: flex;
   align-items: center;
 }
 
-/* Scrolled State via Scroll Event listener */
+/* Scrolled Animation State */
 .navbar--scrolled {
-  background-color: var(--clr-bg-scrolled);
   height: 80px;
+  background-color: var(--clr-bg-scrolled);
   box-shadow: var(--shadow-scrolled);
   border-bottom: 1px solid rgba(255, 95, 162, 0.1);
 }
 
 .navbar__container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -72,7 +72,7 @@
 }
 
 /* ==========================================================================
-   LEFT SIDE: LOGO STYLE & ANIMATIONS
+   LEFT SIDE: BRAND LOGO
    ========================================================================== */
 .navbar__logo-wrapper {
   flex: 1;
@@ -82,31 +82,27 @@
 
 .navbar__logo {
   font-family: var(--font-elegant);
-  font-size: 2.3rem;
-  font-weight: 600;
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-style: italic;
   text-decoration: none;
-  letter-spacing: 1px;
-  background: var(--grad-logo);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--clr-pink-primary);
   display: inline-block;
   cursor: pointer;
-  transition: var(--transition-smooth);
-  
-  /* Logo Fade-In entry animation */
-  animation: logoFadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  transition: var(--transition-premium);
+  animation: logoEntrance 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 0;
 }
 
 .navbar__logo:hover {
-  transform: scale(1.04);
-  filter: drop-shadow(0 0 8px rgba(255, 95, 162, 0.3));
+  transform: translateY(-1px) scale(1.02);
+  text-shadow: 0 4px 15px rgba(255, 95, 162, 0.2);
 }
 
-@keyframes logoFadeIn {
+@keyframes logoEntrance {
   from {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-20px);
   }
   to {
     opacity: 1;
@@ -115,7 +111,7 @@
 }
 
 /* ==========================================================================
-   CENTER: LINKS & HOVER EFFECT
+   CENTER: NAVIGATION LINKS
    ========================================================================== */
 .navbar__menu-wrapper {
   flex: 2;
@@ -127,36 +123,34 @@
 .navbar__links {
   display: flex;
   list-style: none;
-  gap: 45px;
+  gap: 50px;
 }
 
-/* Staggered Fade-Up Entry Animation for Links */
+/* Entry Animation Sequence */
 .navbar__item {
-  animation: linkFadeUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-  animation-delay: calc(var(--item-index) * 0.15s);
+  animation: linkEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: calc(var(--item-index) * 0.12s);
   opacity: 0;
 }
 
 .navbar__link {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   color: var(--clr-text-dark);
   text-decoration: none;
   position: relative;
-  padding: 8px 0;
-  transition: var(--transition-smooth);
+  padding: 10px 4px;
+  transition: var(--transition-premium);
 }
 
-/* Hover/Interaction Aesthetics */
+/* Interactions & Kinetic Micro-underlines */
 .navbar__link:hover {
-  color: var(--clr-pink);
-  transform: translateY(-2px);
+  color: var(--clr-pink-primary);
 }
 
-/* Animated underline growing from center */
 .navbar__link::after {
   content: '';
   position: absolute;
@@ -164,8 +158,8 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: var(--clr-pink);
-  transition: var(--transition-smooth);
+  background-color: var(--clr-pink-primary);
+  transition: var(--transition-premium);
   transform: translateX(-50%);
 }
 
@@ -174,21 +168,19 @@
 }
 
 /* Active Page State */
-.navbar__link--active,
-.navbar__link.active { /* Integrates seamlessly with NavLink active logic */
-  color: var(--clr-pink) !important;
+.navbar__link--active {
+  color: var(--clr-pink-primary) !important;
   font-weight: 700;
 }
 
-.navbar__link--active::after,
-.navbar__link.active::after {
+.navbar__link--active::after {
   width: 100%;
 }
 
-@keyframes linkFadeUp {
+@keyframes linkEntrance {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -197,7 +189,7 @@
 }
 
 /* ==========================================================================
-   RIGHT SIDE: CTA BUTTON STYLES
+   RIGHT SIDE: UTILITY ACTIONS
    ========================================================================== */
 .navbar__actions {
   flex: 1;
@@ -206,64 +198,12 @@
   align-items: center;
 }
 
-.navbar__btn {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--clr-text-light);
-  background: var(--grad-btn);
-  border: none;
-  padding: 14px 32px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: var(--shadow-soft);
-  position: relative;
-  overflow: hidden; /* Captures modern ripple aura effect */
-  transition: var(--transition-smooth);
-  z-index: 1;
-}
-
-/* Hover states with Scale, Glow, and Pseudo Ripple */
-.navbar__btn:hover {
-  transform: scale(1.08);
-  box-shadow: var(--shadow-btn-glow);
-  background: var(--grad-btn-hover);
-}
-
-.navbar__btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease-out, height 0.6s ease-out;
-  z-index: -1;
-}
-
-.navbar__btn:hover::before {
-  width: 300%;
-  height: 300%;
-}
-
-.navbar__mobile-cta {
-  display: none;
-}
-
-/* ==========================================================================
-   HAMBURGER / RESPONSIVE ARCHITECTURE
-   ========================================================================== */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 26px;
-  height: 19px;
+  width: 28px;
+  height: 18px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -274,58 +214,51 @@
   width: 100%;
   height: 2px;
   background-color: var(--clr-text-dark);
-  transition: var(--transition-smooth);
-  transform-origin: left;
+  transition: var(--transition-premium);
 }
 
 /* ==========================================================================
-   MEDIA QUERIES (TABLET & MOBILE)
+   RESPONSIVE LAYOUT MATRIX
    ========================================================================== */
 
-/* Tablet Spacing Reduction */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .navbar {
-    padding: 25px 40px;
+    padding: 0 40px;
   }
   .navbar__links {
-    gap: 25px;
+    gap: 30px;
   }
 }
 
-/* Mobile Drawer Logic */
+/* Mobile & Tablet State Transition */
 @media (max-width: 768px) {
   .navbar {
-    padding: 20px 24px;
+    padding: 0 24px;
     height: 80px;
-  }
-
-  .navbar__btn--desktop {
-    display: none;
   }
 
   .navbar__hamburger {
     display: flex;
   }
 
-  /* Slide-in Drawer System */
+  /* Right-aligned Full-Height Slide Drawer */
   .navbar__menu-wrapper {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
-    max-width: 340px;
+    width: 75%;
+    max-width: 320px;
     height: 100vh;
     background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: -15px 0 40px rgba(255, 95, 162, 0.05);
     flex-direction: column;
     justify-content: flex-start;
-    padding: 120px 40px 40px 40px;
-    transition: cubic-bezier(0.5, 1, 0.5, 1) 0.5s;
+    padding: 140px 40px;
+    transition: cubic-bezier(0.25, 1, 0.5, 1) 0.6s;
   }
 
-  /* Drawer Active Class toggled via React */
   .navbar__menu-wrapper--open {
     right: 0;
   }
@@ -333,37 +266,28 @@
   .navbar__links {
     flex-direction: column;
     width: 100%;
-    gap: 35px;
-    margin-bottom: 50px;
+    gap: 40px;
   }
 
   .navbar__link {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     display: block;
+    letter-spacing: 2.5px;
   }
 
-  .navbar__mobile-cta {
-    display: block;
-    width: 100%;
-  }
-
-  .navbar__btn--mobile {
-    width: 100%;
-    text-align: center;
-    padding: 16px;
-  }
-
-  /* Transform Hamburger Lines into Close 'X' icon */
+  /* Hamburger to Cross Icon Transformation Animation */
   .navbar__hamburger--open .hamburger-line:nth-child(1) {
-    transform: rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--clr-pink-primary);
   }
 
   .navbar__hamburger--open .hamburger-line:nth-child(2) {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-15px);
   }
 
   .navbar__hamburger--open .hamburger-line:nth-child(3) {
-    transform: rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--clr-pink-primary);
   }
 }

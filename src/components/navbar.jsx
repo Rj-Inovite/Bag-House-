@@ -6,7 +6,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Handle background change on scroll
+  // Handle subtle background shifting on window scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -20,12 +20,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Toggle mobile drawer menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close menu when a link is clicked
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -39,12 +37,12 @@ const Navbar = () => {
         
         {/* --- LEFT SIDE: LUXURY LOGO --- */}
         <div className="navbar__logo-wrapper">
-          <Link to="/" className="navbar__logo" onClick={closeMenu} aria-label="Look Well Parlor Home">
+          <Link to="/" className="navbar__logo" onClick={closeMenu} aria-label="Look Well Home">
             Look Well
           </Link>
         </div>
 
-        {/* --- CENTER: NAVIGATION LINKS --- */}
+        {/* --- CENTER: MAIN NAVIGATION LINKS --- */}
         <div className={`navbar__menu-wrapper ${isMenuOpen ? 'navbar__menu-wrapper--open' : ''}`}>
           <ul className="navbar__links">
             <li className="navbar__item" style={{ '--item-index': 1 }}>
@@ -76,22 +74,10 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-          
-          {/* Mobile-only CTA Button inside drawer */}
-          <div className="navbar__mobile-cta">
-            <button className="navbar__btn navbar__btn--mobile" aria-label="Book an Appointment">
-              Book Appointment
-            </button>
-          </div>
         </div>
 
-        {/* --- RIGHT SIDE: CTA BUTTON & HAMBURGER --- */}
+        {/* --- RIGHT SIDE: RESPONSIVE ACTIONS --- */}
         <div className="navbar__actions">
-          <button className="navbar__btn navbar__btn--desktop" aria-label="Book an Appointment">
-            Book Appointment
-          </button>
-
-          {/* Hamburger Menu Icon */}
           <button 
             className={`navbar__hamburger ${isMenuOpen ? 'navbar__hamburger--open' : ''}`} 
             onClick={toggleMenu}
