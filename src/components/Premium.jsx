@@ -69,8 +69,18 @@ const CATEGORIES = [
 ];
 
 const HERO_COLLAGE = [
-  { src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgHODYFnKa0iUYQTOe4pr9raTT7C3-D6oWgyF9HoBnoA&s=10", alt: "Bridal makeup portrait" },
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzMj4NDI6iOgr-IeCAHaSbGcem75CPb0CFR2UAjEEMg&s=10", alt: "Soft romantic makeup portrait" },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgHODYFnKa0iUYQTOe4pr9raTT7C3-D6oWgyF9HoBnoA&s=10",
+    alt: "Bridal makeup portrait",
+  },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzMj4NDI6iOgr-IeCAHaSbGcem75CPb0CFR2UAjEEMg&s=10",
+    alt: "Soft romantic makeup portrait",
+  },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSCtknGuqeQrDpv5bhJWU9e1sOlDMjoY-Zgvqw1d2LYA&s=10",
+    alt: "Natural glowing makeup portrait",
+  },
 ];
 
 /* "Book a consultation" opens WhatsApp chat with this number, message      */
