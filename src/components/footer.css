@@ -1,14 +1,14 @@
 /* ==========================================================================
-   LUXURY FOOTER DESIGN SYSTEM CONFIGURATION
+   LUXURY PINK & WHITE DESIGN SYSTEM CONFIGURATION
    ========================================================================== */
 .luxe-footer {
-  background-color: #150a0d; /* Ultra deep, premium royal maroon-tinted black */
-  color: rgba(255, 255, 255, 0.7);
-  padding: 100px 80px 0 80px;
+  background-color: #FFF5F7; /* Luxurious, crisp creamy-white with a soft pink glow blush undertone */
+  color: #5A4A4E; /* Soft deep muted taupe-berry for high readability and premium look */
+  padding: 110px 80px 0 80px;
   position: relative;
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
-  border-top: 1px solid rgba(216, 165, 174, 0.15); /* Delicate rose gold top trace line */
+  border-top: 2px solid rgba(255, 95, 162, 0.12); /* Delicate blush ribbon trace line */
 }
 
 .footer-container {
@@ -20,14 +20,25 @@
   padding-bottom: 70px;
 }
 
-/* Background Ambient Luxury Light Burst */
-.footer-glow {
+/* Sophisticated Ambient Pink Light Rays */
+.footer-glow-left {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255, 95, 162, 0.08) 0%, rgba(255,255,255,0) 75%);
+  bottom: -100px;
+  left: -100px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-glow-right {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(106, 16, 40, 0.2) 0%, rgba(0,0,0,0) 70%);
-  bottom: -150px;
-  right: -100px;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, rgba(255,255,255,0) 70%);
+  top: -150px;
+  right: -50px;
   pointer-events: none;
   z-index: 1;
 }
@@ -42,48 +53,49 @@
 
 .footer-heading {
   font-family: 'Playfair Display', serif;
-  color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 400;
-  letter-spacing: 0.5px;
+  color: #3A2E31; /* Deep chocolate-berry for majestic headers */
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
   margin-bottom: 30px;
   position: relative;
 }
 
-/* Simple underlying gold geometric dash indicator */
+/* Elegant romantic pink underline flourish */
 .footer-heading::after {
   content: '';
   position: absolute;
   bottom: -10px;
   left: 0;
-  width: 30px;
-  height: 1px;
-  background-color: #C8A96A; /* Champagne gold */
+  width: 35px;
+  height: 2px;
+  background-color: #ff5fa2; /* Vibrant Rose Pink Accent */
+  border-radius: 2px;
 }
 
-/* Brand Ateliers Design Element */
+/* Brand Logo Design Metamorphosis */
 .footer-brand-logo {
   font-family: 'Parisienne', 'Great Vibes', cursive;
-  font-size: 3rem;
-  font-weight: 500;
+  font-size: 3.4rem;
+  font-weight: 600;
   text-decoration: none;
-  background: linear-gradient(135deg, #ff5fa2 0%, #D8A5AE 50%, #C8A96A 100%);
+  background: linear-gradient(135deg, #ff4081 0%, #ff5fa2 50%, #C8A96A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   transition: all 0.4s ease;
 }
 
 .footer-brand-logo:hover {
-  transform: scale(1.03);
-  filter: drop-shadow(0 0 10px rgba(216, 165, 174, 0.4));
+  transform: scale(1.02);
+  filter: drop-shadow(0 4px 12px rgba(255, 95, 162, 0.25));
 }
 
 .brand-description {
   font-size: 0.95rem;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.55);
+  color: #6E5D62;
   margin-bottom: 30px;
   max-width: 340px;
 }
@@ -95,10 +107,11 @@
 }
 
 .social-icon-link {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 95, 162, 0.2);
+  background-color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,25 +121,26 @@
 
 .icon-platform {
   font-size: 0.75rem;
-  font-weight: 600;
-  color: #C8A96A;
+  font-weight: 700;
+  color: #ff5fa2;
   letter-spacing: 0.5px;
 }
 
 .social-icon-link:hover {
-  background-color: var(--clr-blush-pink, #FDF2F6);
+  background-color: #ff5fa2;
   border-color: #ff5fa2;
-  transform: translateY(-4px);
-  box-shadow: 0 5px 15px rgba(232, 62, 109, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 95, 162, 0.3);
 }
 
 .social-icon-link:hover .icon-platform {
-  color: #6B1028; /* Deep Maroon contrast adjustment */
+  color: #FFFFFF; /* Pure white switch on hover */
 }
 
-/* Links List Utilities */
+/* Navigation Utilities */
 .footer-links-list {
   list-style: none;
+  padding: 0;
 }
 
 .footer-links-list li {
@@ -134,9 +148,10 @@
 }
 
 .footer-links-list a {
-  color: rgba(255, 255, 255, 0.6);
+  color: #6E5D62;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  font-weight: 500;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   display: inline-block;
 }
@@ -146,9 +161,10 @@
   transform: translateX(6px);
 }
 
-/* Contact List Layout Grid */
+/* Contact Details Alignment */
 .footer-contact-list {
   list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -167,14 +183,15 @@
 .footer-contact-list p {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  color: #6E5D62;
 }
 
-/* Newsletter Input Components Form mapping */
+/* Newsletter Input Components */
 .newsletter-text {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.55);
+  color: #6E5D62;
   margin-bottom: 25px;
 }
 
@@ -184,7 +201,7 @@
 
 .footer-input-group {
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 2px solid rgba(255, 95, 162, 0.2);
   padding-bottom: 8px;
   transition: all 0.3s ease;
 }
@@ -196,30 +213,31 @@
 .footer-input-group input {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #3A2E31;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   width: 100%;
   outline: none;
+  padding-right: 10px;
 }
 
 .footer-input-group input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: #A69599;
 }
 
 .footer-submit-btn {
   background: transparent;
   border: none;
-  color: #C8A96A;
+  color: #ff5fa2;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   transition: all 0.3s ease;
 }
 
@@ -228,30 +246,32 @@
 }
 
 .footer-submit-btn:hover {
-  color: #ff5fa2;
+  color: #ff3381;
 }
 
 .footer-submit-btn:hover span {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 /* ==========================================================================
    METADATA BOTTOM BAR
    ========================================================================== */
 .footer-bottom-bar {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 95, 162, 0.1);
   padding: 35px 0;
-  margin-top: 20px;
+  margin-top: 30px;
+  background-color: #FFF0F3; /* Darker soft-blush floor segment */
 }
 
 .footer-bottom-container {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.88rem;
+  color: #8C7B80;
 }
 
 .footer-bottom-legal {
@@ -261,27 +281,26 @@
 }
 
 .footer-bottom-legal a {
-  color: rgba(255, 255, 255, 0.35);
+  color: #8C7B80;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-bottom-legal a:hover {
-  color: rgba(255, 255, 255, 0.7);
+  color: #ff5fa2;
 }
 
 .legal-divider {
-  font-size: 0.6rem;
-  color: rgba(200, 169, 106, 0.3);
+  font-size: 0.7rem;
 }
 
 /* ==========================================================================
-   MOTION ENGINE: OBSERVER REVEAL KEYFRAMES
+   MOTION ENGINE: SMOOTH SCROLL OBSERVER KEYFRAMES
    ========================================================================== */
 .footer-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(40px);
+  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .footer-reveal--active {
@@ -290,7 +309,7 @@
 }
 
 /* ==========================================================================
-   RESPONSION ADAPTABILITY BREAKPOINT LAYOUT MAPPING
+   RESPONSIVE ADAPTABILITY BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1200px) {
   .footer-container {

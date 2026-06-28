@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './footer.css';
 
 const Footer = () => {
-  // Trigger entry animation on scroll using Intersection Observer
+  // Smooth scroll entry animation engine
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,17 +26,18 @@ const Footer = () => {
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
-    alert("✨ Welcome to the inner circle of Look Well Parlor Royalty.");
+    alert("💖 Welcome to the inner circle of Look Well Parlor Royalty.");
   };
 
   return (
     <footer className="luxe-footer footer-reveal">
-      {/* Background Decorative Accents */}
-      <div className="footer-glow" aria-hidden="true"></div>
+      {/* Soft Ambient Light Glow Layers */}
+      <div className="footer-glow-left" aria-hidden="true"></div>
+      <div className="footer-glow-right" aria-hidden="true"></div>
 
       <div className="footer-container">
         
-        {/* BRAND COLUMN */}
+        {/* BRAND IDENTITY COLUMN */}
         <div className="footer-column brand-column">
           <Link to="/" className="footer-brand-logo" aria-label="Look Well Parlor Home">
             Look Well
@@ -57,22 +58,22 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* QUICK LINKS COLUMN */}
+        {/* QUICK EXPLORE LINKS COLUMN */}
         <div className="footer-column links-column">
           <h3 className="footer-heading">Quick Links</h3>
           <ul className="footer-links-list">
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="/">Home Atelier</Link></li>
             <li><Link to="/premium">Our Premium Collection</Link></li>
-            <li><Link to="/contact">Contact Ateliers</Link></li>
+            <li><Link to="/contact">Book Your Slot</Link></li>
           </ul>
         </div>
 
-        {/* CONTACT DETAILS COLUMN */}
+        {/* ATELIER CONTACT DETAILS COLUMN */}
         <div className="footer-column contact-column">
           <h3 className="footer-heading">Contact Details</h3>
           <ul className="footer-contact-list">
             <li>
-              <span className="contact-prefix">📍</span>
+              <span className="contact-prefix">🌸</span>
               <p>Sindhi Camp, Pakki Kholi, Near Patel, India</p>
             </li>
             <li>
@@ -86,7 +87,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* NEWSLETTER COLUMN */}
+        {/* PRIVÉ NEWSLETTER COLUMN */}
         <div className="footer-column newsletter-column">
           <h3 className="footer-heading">Newsletter</h3>
           <p className="newsletter-text">
@@ -96,7 +97,7 @@ const Footer = () => {
             <div className="footer-input-group">
               <input 
                 type="email" 
-                placeholder="Your Luxury Email" 
+                placeholder="Your Luxury Email Address" 
                 aria-label="Email address for newsletter" 
                 required 
               />
@@ -109,7 +110,7 @@ const Footer = () => {
 
       </div>
 
-      {/* FOOTER BOTTOM METADATA */}
+      {/* METADATA & LEGAL BOTTOM BAR */}
       <div className="footer-bottom-bar">
         <div className="footer-bottom-container">
           <p className="copyright-text">
@@ -117,7 +118,7 @@ const Footer = () => {
           </p>
           <div className="footer-bottom-legal">
             <a href="#privacy">Privacy Policy</a>
-            <span className="legal-divider">✦</span>
+            <span className="legal-divider">🌸</span>
             <a href="#terms">Terms of Service</a>
           </div>
         </div>
