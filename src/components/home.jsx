@@ -1124,28 +1124,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/* ------------------------------------------------------------------
- * MAINTENANCE NOTES
- * ------------------------------------------------------------------
- * Swapping in your own studio photography:
- *   - Every image in this file lives in a small, clearly-named array
- *     near the top of the component (heroPortrait, bannerSlides,
- *     premiumServices, lookbookCosmetics, customerReviewWall, and the
- *     owner's portrait inline in the JSX). Replace the `src`/`img`/
- *     `photo` URL on any entry and the layout reflows automatically —
- *     no other code needs to change.
- *   - Keep aspect ratios close to the originals (square for service
- *     cards and gallery tiles, 4:5 for review-wall photos, wide for
- *     banner slides) so cropping stays clean across breakpoints.
- *
- * Adding a new FAQ, service, offer, or review:
- *   - Copy an existing object inside the relevant array and edit the
- *     fields — the rendering, animation, and responsive behaviour are
- *     all driven by the array length, so nothing else needs touching.
- *
- * The WhatsApp number (WHATSAPP_NUMBER, top of file) is the single
- * source of truth for every "instant contact" link on this page.
- * ------------------------------------------------------------------
- */
-
