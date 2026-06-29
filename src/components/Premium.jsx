@@ -55,7 +55,7 @@ const CATEGORIES = [
   {
     id: "no-makeup",
     eyebrow: "04 — Less Is More",
-    title: "No-Makeup Makeup",
+    title: "Glam Makeup",
     description:
       "Skin-first, barely-there artistry that enhances what's already there — soft focus, full confidence.",
     images: [

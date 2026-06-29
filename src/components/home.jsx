@@ -886,7 +886,8 @@ const Home = () => {
           </div>
           <div className="owner-spotlight__right-visual">
             <div className="owner-image-frame">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Ruchi Jasmatiya, Founder of Look Well Parlor" />
+              <img src={"/assets/images/img.jpeg"} alt="Ruchi Jasmatiya, Founder of Look Well Parlor" />
+
               <div className="frame-signature-badge">
                 <span className="frame-signature-badge__crown" aria-hidden="true">✦</span>
                 Look Well Director
