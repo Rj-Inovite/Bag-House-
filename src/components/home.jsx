@@ -2,53 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './home.css';
 
-/**
- * Home.jsx — Look Well Parlor
- * ------------------------------------------------------------------
- * Royal pink & white editorial system — the same design language as
- * Premium.jsx / Footer.jsx, so the whole site reads as one brand:
- *   --rose-50  #FFF6F8   warm white background
- *   --rose-100 #FCE4EC   soft fills
- *   --rose-300 #F3A6C2   mid accent
- *   --rose-500 #E0457B   primary rose — the named "signature pink"
- *   --rose-700 #B22F5C   deep accent / hover
- *   --ink      #2B1620   warm near-black text
- *   --gold     #C9A24B   metallic accent — reserved for the owner
- *                        spotlight, used sparingly
- * Display type: "Fraunces" (heavy weight). Body: "Inter".
- *
- * THE PINK VERTICAL LINE BUG — ACTIVELY NEUTRALIZED THIS REVISION:
- *   That bar's behavior (full viewport height, ignores section
- *   boundaries) is the signature of a `position: fixed` or `sticky`
- *   element with no `right`/`width` constraint, sitting in a layout
- *   shell OUTSIDE this component (App.jsx / Layout.jsx / Navbar.jsx).
- *   Since this file can't edit a sibling component, it now actively
- *   defends against it at runtime: `useKillStrayFixedBars()` below
- *   scans the whole document on mount and on every resize, finds any
- *   thin (<= 12px wide or tall) fixed/sticky-positioned element that
- *   is NOT part of this page's own UI, and forces it invisible. This
- *   cannot break legitimate UI (modals, real sidebars, wide banners
- *   are all skipped by the width/height heuristic) and runs once per
- *   mount, so it has no performance cost during normal scrolling.
- *
- * HERO CHOREOGRAPHY:
- *   "Welcome to Look Well Parlor" loads centered and large, then the
- *   whole hero settles into its two-column resting layout — text
- *   left, portrait photograph developing into view on the right.
- *
- * BANNER SECTION (enhanced this revision):
- *   Full-bleed, taller, with a slow Ken-Burns zoom per slide, a
- *   gradient veil, a category tag, a progress-bar timer (not just
- *   dots), and large readable captions. Fully reworked for mobile:
- *   shorter viewport height, repositioned caption, touch-friendly
- *   dot targets, no off-screen overflow at any width.
- *
- * NEW SECTION — "What Our Customers Say":
- *   A photo-driven testimonial wall: 5 real client photos paired with
- *   short Indian-context reviews, laid out as a responsive masonry-
- *   style grid that becomes a single column on mobile.
- * ------------------------------------------------------------------
- */
+
 
 // Reusable Custom Hook for Counting Numbers Upwards on Viewport Intersection
 const useCounter = (endValue, duration = 2000, startTrigger = false) => {
@@ -83,24 +37,7 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponen
 
 /**
  * useKillStrayFixedBars
- * ------------------------------------------------------------------
- * Actively hunts down and hides the kind of element that produces a
- * thin pink (or any color) line pinned to a screen edge: something
- * with `position: fixed` or `position: sticky`, very narrow OR very
- * short, that is not part of this page's own markup.
- *
- * Heuristic (deliberately conservative, so it never hides real UI):
- *   - Must be position: fixed or sticky
- *   - Must be thinner than 14px (a "line") OR shorter than 14px
- *     while spanning most of the viewport width/height (a "bar")
- *   - Must NOT be inside .parlor-architecture-wrapper (this page
- *     never needs to hide its own elements — its modal, arrows, etc.
- *     are all comfortably wider/taller than 14px)
- *
- * Runs once after mount, then again on resize (debounced), and
- * additionally re-scans shortly after mount to catch elements that
- * other scripts inject slightly after first paint.
- * ------------------------------------------------------------------
+ ------------------------------------------------------------------
  */
 function useKillStrayFixedBars() {
   useEffect(() => {
@@ -182,47 +119,29 @@ const Home = () => {
      ========================================================================== */
 
   const heroPortrait = {
-    src: 'https://toniandguysalon.in/indian-bridal-makeup-ideas-and-looks/',
+    src: 'https://i.pinimg.com/736x/ba/47/d5/ba47d5620ab97550e4b1435b9eb1f3d2.jpg',
     alt: 'Traditional Indian bridal makeup look by Look Well Parlor',
   };
 
   // Full-bleed banner — enhanced with a category tag + Ken-Burns zoom
   const bannerSlides = [
     {
-      src: 'https://images.unsplash.com/photo-1610740362959-22cf01e09a90?q=80&w=2000&auto=format&fit=crop',
+      src: 'https://img.magnific.com/premium-vector/cosmetic-fashion-sale-promotion-social-media-facebook-cover-banner-template_225928-53.jpg?semt=ais_hybrid&w=740&q=80',
       alt: 'Bridal portrait with rich makeup and gold jewellery',
       tag: 'Bridal',
       caption: 'Festive bridal looks finished in rich gold and red.',
     },
     {
-      src: 'https://images.unsplash.com/photo-1503104834685-7205e8607eb9?q=80&w=2000&auto=format&fit=crop',
+      src:'https://img.magnific.com/premium-vector/cosmetics-skin-care-gold-product-ads-red-rose-bottle-background-glittering-light-effect_258787-1220.jpg?semt=ais_hybrid&w=740&q=80',
       alt: 'Glamorous evening makeup look',
       tag: 'Party Glam',
       caption: 'Statement evening glamour, built to last till the last dance.',
     },
     {
-      src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2000&auto=format&fit=crop',
+      src: 'https://www.shutterstock.com/image-vector/cosmetics-skin-care-product-ads-260nw-2048295143.jpg',
       alt: 'Elegant makeup application close-up',
       tag: 'Studio Artistry',
       caption: 'Precision artistry — every detail considered, every finish flawless.',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=2000&auto=format&fit=crop',
-      alt: 'Soft romantic engagement makeup look',
-      tag: 'Engagement',
-      caption: 'Soft, luminous glam for the moment the ring goes on.',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2000&auto=format&fit=crop',
-      alt: 'Bright modern beauty salon interior',
-      tag: 'Inside The Studio',
-      caption: 'A calm, private space designed around your comfort.',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1604881991720-f91add269bed?q=80&w=2000&auto=format&fit=crop',
-      alt: 'Bridal hands with mehndi and gold bangles',
-      tag: 'Bridal Detailing',
-      caption: 'From mehndi to the final touch-up, every detail is considered.',
     },
   ];
 
@@ -230,7 +149,7 @@ const Home = () => {
     {
       id: 's1',
       title: 'Bridal Makeup Masterpiece',
-      img: 'https://toniandguysalon.in/indian-bridal-makeup-ideas-and-looks/',
+      img: 'https://sohnijuneja.com/wp-content/uploads/2025/08/IMG_4542-1-1-scaled.jpg',
       desc: 'Signature bridal looks with rich, long-lasting pigments and flawless finish.',
      
     },
@@ -272,7 +191,7 @@ const Home = () => {
     {
       id: 's8',
       title: 'Engagement & Ring Ceremony Glam',
-      img: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeqx3qdKdTNGIuCZ7JSo4RNYY5bjJ12rmJJL12UuW6bjVDfEi-jx0e7Dwg&s=10',
       desc: 'Soft, luminous looks for the moment the ring goes on — radiant, never overdone.',
       
     },
@@ -329,7 +248,7 @@ const Home = () => {
       category: 'bridal',
     },
     {
-      src: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://www.casamujer.cl/wp-content/uploads/2024/07/Limpieza-.png',
       label: 'Dewy Skin Finish',
       category: 'skin',
     },
@@ -344,7 +263,7 @@ const Home = () => {
       category: 'hair',
     },
     {
-      src: 'https://images.unsplash.com/photo-1591375372275-615b89a08a5c?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeqx3qdKdTNGIuCZ7JSo4RNYY5bjJ12rmJJL12UuW6bjVDfEi-jx0e7Dwg&s=10',
       label: 'Evening Glam',
       category: 'party',
     },
@@ -354,7 +273,7 @@ const Home = () => {
       category: 'bridal',
     },
     {
-      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx2upXKtJGnhndE8agCvjFlRW2eceFv8gKB7vk6B7rL310KcF85reqXlo&s=10',
+      src: 'https://vurvesalon.com/wp-content/uploads/2023/04/Skin-care.png',
       label: 'Soft Romantic Glam',
       category: 'skin',
     },
@@ -470,7 +389,7 @@ const Home = () => {
       text: 'Booked for my sister\'s sangeet — the team understood exactly the bold, festive look we wanted. Highly recommend Look Well for any function.',
     },
     {
-      photo: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=500&auto=format&fit=crop',
+      photo: 'https://i.pinimg.com/736x/21/64/5a/21645a09132203571746af3b673574f3.jpg',
       name: 'Anjali Sharma',
       
       occasion: 'Engagement',
@@ -478,7 +397,15 @@ const Home = () => {
       text: 'Engagement ke liye soft glam look chahiye tha, bilkul perfect mila. Staff bahut hi polite aur professional hai. Studio bhi bahut hygienic laga.',
     },
     {
-      photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOJuYe56nWCQpX18YZ5sBnWj7Lgek9U6Ehry6wrxgVPRafYq0NhU8bx0&s=10',
+      photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReJrBmvNd6qJEUji-GU5RNU29KZ0jXTqNI-B_AIWCPWZdvh_5X_xjTN_k&s=10',
+      name: 'Ruchi Joshi',
+     
+      occasion: 'Engagement look',
+      rating: 5,
+      text: 'Came in for a regular facial and left glowing — the products they use are genuinely premium. My skin felt soft for almost two weeks after.',
+    },
+    {
+      photo: 'https://www.casamujer.cl/wp-content/uploads/2024/07/Limpieza-.png',
       name: 'Kavita Joshi',
      
       occasion: 'Facial & Skin Therapy',
@@ -655,10 +582,10 @@ const Home = () => {
               <span>Trusted since 2011</span>
             </div>
             <div className="luxe-hero__floating-tag luxe-hero__floating-tag--top">
-              <span aria-hidden="true">👑</span> Bridal Specialists
+              <span aria-hidden="true"></span> 
             </div>
             <div className="luxe-hero__floating-tag luxe-hero__floating-tag--bottom">
-              <span aria-hidden="true">✨</span> HD &amp; Airbrush Finish
+              <span aria-hidden="true"></span> HD &amp; Airbrush Finish
             </div>
           </div>
         </div>
@@ -820,32 +747,32 @@ const Home = () => {
           </div>
           <div className="why-us__grid-five">
             <div className="why-card-five">
-              <div className="why-badge-dark-pink">👑</div>
+              <div className="why-badge-dark-pink"></div>
               <h3>We Are Expert</h3>
               <p>Certified elite master technicians guiding style evolutions.</p>
             </div>
             <div className="why-card-five">
-              <div className="why-badge-dark-pink">💄</div>
+              <div className="why-badge-dark-pink"></div>
               <h3>Premium Product</h3>
               <p>Exclusively authentic global luxury cosmetics portfolios.</p>
             </div>
             <div className="why-card-five">
-              <div className="why-badge-dark-pink">🧼</div>
+              <div className="why-badge-dark-pink"></div>
               <h3>Hygiene Standards</h3>
               <p>Strict non-negotiable autoclave tool medical sterilization protocols.</p>
             </div>
             <div className="why-card-five">
-              <div className="why-badge-dark-pink">👩</div>
+              <div className="why-badge-dark-pink"></div>
               <h3>Only For Ladies</h3>
               <p>A completely private, secure, and peaceful beauty lounge environment.</p>
             </div>
             <div className="why-card-five">
-              <div className="why-badge-dark-pink">❤️</div>
+              <div className="why-badge-dark-pink"></div>
               <h3>Customer Satisfaction</h3>
               <p>Meticulous attention to your custom aesthetic profile guidelines.</p>
             </div>
             <div className="why-card-five">
-              <div className="why-badge-dark-pink">⏱️</div>
+              <div className="why-badge-dark-pink"></div>
               <h3>On-Time, Every Time</h3>
               <p>Punctual studio and on-location service so your schedule never slips.</p>
             </div>
