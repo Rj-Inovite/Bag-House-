@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Contact.css';
+import './contact.css';
 
 /**
  * Premium Parlour Contact Component
