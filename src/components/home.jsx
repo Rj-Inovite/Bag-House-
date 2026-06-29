@@ -857,10 +857,10 @@ const Home = () => {
         <div className="owner-spotlight__container">
           <div className="owner-spotlight__left-content">
             <span className="section-pre owner-pre">The Master Artisan Behind The Vision</span>
-            <h2 className="owner-title">Ruchi Jasmatiya</h2>
+            <h2 className="owner-title">Shila Chavhan</h2>
             <span className="owner-subtitle">Founder &amp; Lead Aesthetic Architect</span>
             <p className="owner-bio">
-              With a distinguished career mapping high-end bridal architecture, Ruchi Jasmatiya established Look Well Parlor to inject couture artistic precision into traditional event makeovers.
+              With a distinguished career mapping high-end bridal architecture, Shila Chavhan established Look Well Parlor to inject couture artistic precision into traditional event makeovers.
             </p>
             <p className="owner-bio">
               Her technical layouts prioritize long-lasting skin integration, vivid eye shadow composition fields, and customized facial hydration textures. Under her leadership, Look Well sets a premier standard for customized beauty services.
@@ -886,7 +886,8 @@ const Home = () => {
           </div>
           <div className="owner-spotlight__right-visual">
             <div className="owner-image-frame">
-              <img src={"/assets/images/img.jpeg"} alt="Ruchi Jasmatiya, Founder of Look Well Parlor" />
+<img src={"/assets/images/img.jpeg"} alt="Ruchi Jasmatiya, Founder of Look Well Parlor" />
+
 
               <div className="frame-signature-badge">
                 <span className="frame-signature-badge__crown" aria-hidden="true">✦</span>
