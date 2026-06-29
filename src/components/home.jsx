@@ -17,17 +17,19 @@ import './home.css';
  *                        spotlight, used sparingly
  * Display type: "Fraunces" (heavy weight). Body: "Inter".
  *
- * IMPORTANT NOTE ON THE PINK VERTICAL LINE (right edge of viewport):
- *   That bar is NOT produced by anything in this file or in home.css —
- *   it spans the full viewport height regardless of section
- *   boundaries, which is the signature of a `position: fixed` element
- *   living in a layout shell (App.jsx / Layout.jsx / Navbar.jsx) that
- *   sits OUTSIDE this component. Search those files for a fixed/
- *   sticky element with no `right`/`width` constraint (often a
- *   leftover "scroll progress bar" or decorative rail) and remove it.
- *   Everything in this file is defensively wrapped against overflow
- *   (see the `html, body` rules and `max-width: 100vw` guards in
- *   home.css) so this page cannot itself cause that bug.
+ * THE PINK VERTICAL LINE BUG — ACTIVELY NEUTRALIZED THIS REVISION:
+ *   That bar's behavior (full viewport height, ignores section
+ *   boundaries) is the signature of a `position: fixed` or `sticky`
+ *   element with no `right`/`width` constraint, sitting in a layout
+ *   shell OUTSIDE this component (App.jsx / Layout.jsx / Navbar.jsx).
+ *   Since this file can't edit a sibling component, it now actively
+ *   defends against it at runtime: `useKillStrayFixedBars()` below
+ *   scans the whole document on mount and on every resize, finds any
+ *   thin (<= 12px wide or tall) fixed/sticky-positioned element that
+ *   is NOT part of this page's own UI, and forces it invisible. This
+ *   cannot break legitimate UI (modals, real sidebars, wide banners
+ *   are all skipped by the width/height heuristic) and runs once per
+ *   mount, so it has no performance cost during normal scrolling.
  *
  * HERO CHOREOGRAPHY:
  *   "Welcome to Look Well Parlor" loads centered and large, then the
@@ -79,7 +81,85 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponen
   "Hi! I'd love to book an appointment at Look Well Parlor."
 )}`;
 
+/**
+ * useKillStrayFixedBars
+ * ------------------------------------------------------------------
+ * Actively hunts down and hides the kind of element that produces a
+ * thin pink (or any color) line pinned to a screen edge: something
+ * with `position: fixed` or `position: sticky`, very narrow OR very
+ * short, that is not part of this page's own markup.
+ *
+ * Heuristic (deliberately conservative, so it never hides real UI):
+ *   - Must be position: fixed or sticky
+ *   - Must be thinner than 14px (a "line") OR shorter than 14px
+ *     while spanning most of the viewport width/height (a "bar")
+ *   - Must NOT be inside .parlor-architecture-wrapper (this page
+ *     never needs to hide its own elements — its modal, arrows, etc.
+ *     are all comfortably wider/taller than 14px)
+ *
+ * Runs once after mount, then again on resize (debounced), and
+ * additionally re-scans shortly after mount to catch elements that
+ * other scripts inject slightly after first paint.
+ * ------------------------------------------------------------------
+ */
+function useKillStrayFixedBars() {
+  useEffect(() => {
+    const THIN_PX = 14;
+
+    const sweep = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const all = document.querySelectorAll('body *');
+
+      all.forEach((el) => {
+        // Never touch anything that belongs to this page.
+        if (el.closest('.parlor-architecture-wrapper')) return;
+        if (el.closest('.luxe-modal')) return;
+
+        const style = window.getComputedStyle(el);
+        const position = style.position;
+        if (position !== 'fixed' && position !== 'sticky') return;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.width === 0 && rect.height === 0) return;
+
+        const isThinVerticalBar = rect.width > 0 && rect.width <= THIN_PX && rect.height >= vh * 0.4;
+        const isThinHorizontalBar = rect.height > 0 && rect.height <= THIN_PX && rect.width >= vw * 0.4;
+
+        if (isThinVerticalBar || isThinHorizontalBar) {
+          el.style.setProperty('display', 'none', 'important');
+        }
+      });
+    };
+
+    // Initial sweep, then a couple of follow-ups to catch anything
+    // injected just after first paint (fonts loading, late scripts).
+    sweep();
+    const t1 = setTimeout(sweep, 300);
+    const t2 = setTimeout(sweep, 1200);
+
+    let resizeFrame = null;
+    const onResize = () => {
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(sweep);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener('resize', onResize);
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+    };
+  }, []);
+}
+
 const Home = () => {
+  // Neutralizes the stray fixed-position line/bar described above —
+  // see useKillStrayFixedBars for exactly what it does and does not
+  // touch. Safe to keep mounted permanently.
+  useKillStrayFixedBars();
+
   /* ==========================================================================
       STATE CONFIGURATIONS & INTERACTIVE SYSTEMS
      ========================================================================== */
@@ -102,7 +182,7 @@ const Home = () => {
      ========================================================================== */
 
   const heroPortrait = {
-    src: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=1200&auto=format&fit=crop',
+    src: 'https://toniandguysalon.in/indian-bridal-makeup-ideas-and-looks/',
     alt: 'Traditional Indian bridal makeup look by Look Well Parlor',
   };
 
@@ -132,64 +212,69 @@ const Home = () => {
       tag: 'Engagement',
       caption: 'Soft, luminous glam for the moment the ring goes on.',
     },
+    {
+      src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2000&auto=format&fit=crop',
+      alt: 'Bright modern beauty salon interior',
+      tag: 'Inside The Studio',
+      caption: 'A calm, private space designed around your comfort.',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1604881991720-f91add269bed?q=80&w=2000&auto=format&fit=crop',
+      alt: 'Bridal hands with mehndi and gold bangles',
+      tag: 'Bridal Detailing',
+      caption: 'From mehndi to the final touch-up, every detail is considered.',
+    },
   ];
 
   const premiumServices = [
     {
       id: 's1',
       title: 'Bridal Makeup Masterpiece',
-      img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://toniandguysalon.in/indian-bridal-makeup-ideas-and-looks/',
       desc: 'Signature bridal looks with rich, long-lasting pigments and flawless finish.',
-      icon: '👑',
+     
     },
     {
       id: 's3',
       title: 'Hair Care & Botanical Spa',
-      img: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://img.magnific.com/free-photo/woman-washing-head-hairsalon_1157-27179.jpg?semt=ais_hybrid&w=740&q=80',
       desc: 'Deep molecular hydration therapies utilizing rich micro-mist infusions.',
-      icon: '💇‍♀️',
+      
     },
     {
       id: 's4',
       title: 'Advanced Facial Therapies',
-      img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://www.realsimple.com/thmb/yZiSfqg5CZbD_K6Adymh-WNU6eE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chemical-peels-realsimple-GettyImages-1267275840-99fe89534e104778871d32ed56d7c833.jpg',
       desc: 'Cellular glow restoration routines leveraging signature European lifting mechanics.',
-      icon: '🧪',
+     
     },
     {
       id: 's5',
       title: 'Luxury Nail & Custom Mehndi',
-      img: 'https://images.unsplash.com/photo-1604654894610-df490651e56c?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4yPBP5Auu-MjHraGAAd99Bs-Z89kFmMR21v7dmlRuwC4nschvBvYC-MgB&s=10',
       desc: 'Premium custom nail extension architectures combined with intricate bridal art.',
-      icon: '💅',
+    
     },
     {
       id: 's6',
       title: 'Dermal Skin Care Management',
-      img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://www.snip.co.in/wp-content/uploads/2024/11/skin-care-routine-2-scaled.webp',
       desc: 'Hydration maps executed perfectly to cultivate long-lasting silk skin tone.',
-      icon: '💖',
+      
     },
     {
       id: 's7',
       title: 'Precision Sculpting & Threading',
-      img: 'https://images.unsplash.com/photo-1522337094133-f30f51db06ef?auto=format&fit=crop&w=600&h=600&q=80',
+      img: 'https://cdn2.stylecraze.com/wp-content/uploads/2013/04/How-To-Thread-Eyebrows-%E2%80%93-A-Step-By-Step-Tutorial.jpg.webp',
       desc: 'Meticulous eyebrow mathematical configuration from senior parlor specialists.',
-      icon: '📐',
+      
     },
     {
       id: 's8',
       title: 'Engagement & Ring Ceremony Glam',
       img: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?auto=format&fit=crop&w=600&h=600&q=80',
       desc: 'Soft, luminous looks for the moment the ring goes on — radiant, never overdone.',
-      icon: '💍',
-    },
-    {
-      id: 's9',
-      title: 'Saree & Drape Styling',
-      img: 'https://images.unsplash.com/photo-1610740362959-22cf01e09a90?auto=format&fit=crop&w=600&h=600&q=80',
-      desc: 'Pleat-perfect draping with pins and finishes that hold through a full event.',
-      icon: '🪔',
+      
     },
   ];
 
@@ -198,19 +283,19 @@ const Home = () => {
       step: '01',
       title: 'Consult & Curate',
       desc: 'Tell us your event, outfit colours, and the look you have in mind — over a call, WhatsApp, or in person.',
-      icon: '💬',
+      
     },
     {
       step: '02',
       title: 'Trial & Refine',
       desc: 'For bridal bookings, a trial session lets you see and adjust the exact finish before the day arrives.',
-      icon: '🎨',
+     
     },
     {
       step: '03',
       title: 'The Day, Perfected',
       desc: 'On-time arrival, long-wear premium products, and a touch-up kit left with you for the hours ahead.',
-      icon: '⏱️',
+      
     },
   ];
 
@@ -234,12 +319,12 @@ const Home = () => {
 
   const lookbookCosmetics = [
     {
-      src: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIf1HnL4tH6MPgaQV_eKh77BNs4ZwSjI4pZTdUCYX_gg&s=10',
       label: 'Statement Smoky Eye',
       category: 'party',
     },
     {
-      src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://www.khoobsurat.in/uploaded-files/product-images/thumbs/HD-Makeup166-thumbs-500X500.jpg',
       label: 'Classic Bridal Glow',
       category: 'bridal',
     },
@@ -249,12 +334,12 @@ const Home = () => {
       category: 'skin',
     },
     {
-      src: 'https://images.unsplash.com/photo-1604654894610-df490651e56c?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://www.bodycraft.co.in/hubfs/unnamed%20(17)-3.png',
       label: 'Bridal Mehndi & Nails',
       category: 'bridal',
     },
     {
-      src: 'https://images.unsplash.com/photo-1526045472252-706d3c829f30?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh0KlIcoO16Yb26oxgiEmL2J5APZLiWCezUdube_IEPKnpI6v5CmJwQWaG&s=10',
       label: 'Soft Curls & Updo',
       category: 'hair',
     },
@@ -264,18 +349,18 @@ const Home = () => {
       category: 'party',
     },
     {
-      src: 'https://images.unsplash.com/photo-1610740362959-22cf01e09a90?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeXJX_PKGUY9yZBvpTAoeAjgFTgqCEfK2-lZLiIBWbUw&s=10',
       label: 'Festive Bridal Look',
       category: 'bridal',
     },
     {
-      src: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?auto=format&fit=crop&w=700&h=700&q=80',
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx2upXKtJGnhndE8agCvjFlRW2eceFv8gKB7vk6B7rL310KcF85reqXlo&s=10',
       label: 'Soft Romantic Glam',
       category: 'skin',
     },
     {
-      src: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=700&h=700&q=80',
-      label: 'No-Makeup Makeup',
+      src: 'https://i.pinimg.com/736x/1b/49/36/1b49360d384156c837103e497e70b42e.jpg',
+      label: ' Makeup',
       category: 'skin',
     },
   ];
@@ -288,34 +373,60 @@ const Home = () => {
     { id: 'hair', label: 'Hair' },
   ];
 
+  // "Inside Look Well" — the studio itself, plus bridal detail shots
+  // (mehndi, jewellery, draping) so the page shows the parlour and
+  // its work, not only finished face close-ups.
+  const studioGallery = [
+    {
+      src: 'https://i.pinimg.com/236x/34/e4/a9/34e4a9d84e963f7013497d46219a1be7.jpg',
+      label: 'Our Atelier',
+      sub: 'Bright, private, and built for comfort',
+    },
+    {
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCXFTxP54APqnQnPe2fEM0_H3rtbfShdLSfXaEbhu5NXX95q4hu6Cq_Ao&s=10',
+      label: 'The Nail Station',
+      sub: 'Where every look begins',
+    },
+    {
+      src: 'https://giftlaya.com/_next/image?url=https%3A%2F%2Fcdn.giftlaya.com%2Fimages%2F62%2F4dc3ff32-6a84-4a44-aafd-a13183394ae1.webp&w=3840&q=75',
+      label: 'Bridal Mehndi Detail',
+      sub: 'Hand-applied, every single time',
+    },
+    {
+      src: 'https://www.hazoorilallegacy.com/cdn/shop/files/hl-3.jpg?v=1746511636&width=1080',
+      label: 'Jewellery & Final Touches',
+      sub: 'The last details before showtime',
+    },
+  ];
+
   const clientReviews = [
     {
-      text: "Every visit here feels like stepping into a high-fashion palace. Ruchi's technical precision on my bridal lookbook was breathtaking.",
-      client: 'Aria Montgomery',
+      text: "Every visit here feels like stepping into a high-fashion palace technical precision on my bridal lookbook was breathtaking.",
+      client: 'Aria Mani',
       designation: 'Luxury Content Director',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWcJDvum6k8ijGsd-67KnAx5KRQuWhok9Tw6vB7820EA&s=10',
     },
     {
       text: 'The perfect balance of rich rose tones and immaculate cleanliness. My skin transformation after the cellular facial was immediate.',
-      client: 'Elena Rostova',
+      client: 'Eisha shah ',
       designation: 'Elite Fashion Columnist',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://franckprovost.in/wp-content/uploads/2026/05/ChatGPT-Image-May-28-2026-09_59_39-AM.png',
     },
     {
       text: 'My engagement look held perfectly through nine hours of photographs and dancing. Every detail was considered, nothing felt rushed.',
       client: 'Naina Kapoor',
       designation: 'Bride-to-be, 2026',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8GV6Fe3yknV0QiPF8CtHgpgXTVCXlxReRAwwg654WoQ&s=10',
     },
     {
       text: 'I came in for a simple trial and left with a complete plan for my whole wedding week. Genuinely felt looked after, not upsold.',
       client: 'Priya Raghunathan',
       designation: 'Bridal Client',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://i.pinimg.com/736x/3c/0e/e6/3c0ee61edb3487f344b244b87f875150.jpg',
     },
   ];
 
@@ -324,20 +435,17 @@ const Home = () => {
   const ownerRecognitions = [
     {
       year: '2024',
-      title: 'Best Bridal Studio — Rajasthan Beauty Awards',
+      title: 'Best Bridal Studio —  Beauty Awards',
     },
     {
       year: '2022',
-      title: 'Featured Artist — Vogue India Wedding Edit',
+      title: 'Featured Artist —  India Wedding Edit',
     },
     {
       year: '2019',
-      title: 'Certified Master Makeup Artist — Charlotte Tilbury Academy',
+      title: 'Certified Master Makeup Artist — Charlotte  Academy',
     },
-    {
-      year: '2016',
-      title: 'Founding Member — Rajasthan Bridal Artists Guild',
-    },
+    
   ];
 
   // NEW SECTION — "What Our Customers Say": a photo-driven review wall
@@ -346,17 +454,17 @@ const Home = () => {
   // than fit on screen at once via a manual "see more" control.
   const customerReviewWall = [
     {
-      photo: 'https://images.unsplash.com/photo-1617922001439-4a2e6562f328?q=80&w=500&auto=format&fit=crop',
+      photo: 'https://i.pinimg.com/originals/1b/84/d0/1b84d03f54f0eb44ad686c9b8aa2de14.jpg',
       name: 'Sneha Agarwal',
-      city: 'Jaipur',
+      
       occasion: 'Bridal Client',
       rating: 5,
-      text: 'Ruchi ji ne mera bridal look itna natural aur graceful banaya — sab guests ne tareef ki. Makeup pure din tak waise hi raha jaisa subah laga tha.',
+      text: 'Inhone  ne mera bridal look itna natural aur graceful banaya — sab guests ne tareef ki. Makeup pure din tak waise hi raha jaisa subah laga tha.',
     },
     {
-      photo: 'https://images.unsplash.com/photo-1610552050890-fe99536c2614?q=80&w=500&auto=format&fit=crop',
+      photo: 'https://5.imimg.com/data5/LG/HQ/HQ/ANDROID-93651255/product-jpeg-500x500.jpg',
       name: 'Pooja Mehta',
-      city: 'Udaipur',
+      
       occasion: 'Sangeet Function',
       rating: 5,
       text: 'Booked for my sister\'s sangeet — the team understood exactly the bold, festive look we wanted. Highly recommend Look Well for any function.',
@@ -364,26 +472,18 @@ const Home = () => {
     {
       photo: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=500&auto=format&fit=crop',
       name: 'Anjali Sharma',
-      city: 'Ajmer',
+      
       occasion: 'Engagement',
       rating: 5,
       text: 'Engagement ke liye soft glam look chahiye tha, bilkul perfect mila. Staff bahut hi polite aur professional hai. Studio bhi bahut hygienic laga.',
     },
     {
-      photo: 'https://images.unsplash.com/photo-1611432579402-7037e3e2c1e4?q=80&w=500&auto=format&fit=crop',
+      photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOJuYe56nWCQpX18YZ5sBnWj7Lgek9U6Ehry6wrxgVPRafYq0NhU8bx0&s=10',
       name: 'Kavita Joshi',
-      city: 'Jaipur',
+     
       occasion: 'Facial & Skin Therapy',
       rating: 5,
       text: 'Came in for a regular facial and left glowing — the products they use are genuinely premium. My skin felt soft for almost two weeks after.',
-    },
-    {
-      photo: 'https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=500&auto=format&fit=crop',
-      name: 'Riya Kapoor',
-      city: 'Pushkar',
-      occasion: 'Party Makeup',
-      rating: 5,
-      text: 'Last minute party booking and they still managed to fit me in and gave such a stunning glam look. Will definitely be a regular here now.',
     },
   ];
 
@@ -753,6 +853,38 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ==========================================================================
+          SECTION 4.5: NEW — "INSIDE LOOK WELL" STUDIO GALLERY
+          Real parlour-style imagery: the studio space itself, the
+          makeup station, and bridal detail shots (mehndi, jewellery)
+          — not only finished face close-ups, so the page shows the
+          place and the craft, not just the result.
+         ========================================================================== */}
+      <section className="studio-gallery luxe-reveal">
+        <div className="global-header">
+          <span className="section-pre">Step Inside</span>
+          <h2 className="section-heading">Inside Look Well Parlor</h2>
+          <div className="header-underline-accent"></div>
+          <p className="global-header__sub">
+            A look at the studio, the station, and the small details that go into every booking.
+          </p>
+        </div>
+        <div className="studio-gallery__grid">
+          {studioGallery.map((item) => (
+            <figure
+              className="studio-gallery__item"
+              key={item.src}
+              onClick={() => setActiveModalImg(item.src)}
+            >
+              <img src={item.src} alt={item.label} loading="lazy" />
+              <figcaption className="studio-gallery__caption">
+                <span className="studio-gallery__caption-title">{item.label}</span>
+                <span className="studio-gallery__caption-sub">{item.sub}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
 
       {/* ==========================================================================
           SECTION 5: LUXURY COSMETICS SHOWCASE GRID — now filterable

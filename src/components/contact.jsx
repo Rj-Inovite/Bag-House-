@@ -1,335 +1,402 @@
 import React, { useState, useEffect } from 'react';
-import './contact.css';
+import './Contact.css';
 
+/**
+ * Premium Parlour Contact Component
+ * Custom Engineered for Luxury Beauty Spaces
+ * Features: Multi-Branch Selectors, Custom Dropdowns, Native Protocol Handlers, Dynamic Accordions
+ */
 const Contact = () => {
-  // Accordion active state index tracking
+  // Global State Configuration
+  const [selectedBranch, setSelectedBranch] = useState('main');
+  const [selectedService, setSelectedService] = useState('');
+  const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
+  const [animatedElements, setAnimatedElements] = useState([]);
 
-  // Form input validation state architecture
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  // Business Contact Coordinates
+  const phoneNumber = "7720929132";
+  const formattedDisplayNumber = "+91 77209-29132";
 
-  // Scroll Reveal Observer Setup
-  useEffect(() => {
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('luxe-fade-up--active');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const elements = document.querySelectorAll('.luxe-fade-up');
-    elements.forEach((el) => revealObserver.observe(el));
-
-    return () => elements.forEach((el) => revealObserver.unobserve(el));
-  }, []);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (formData.fullName && formData.email && formData.phone) {
-      setFormSubmitted(true);
-      setTimeout(() => setFormSubmitted(false), 5000);
+  // Dynamic Content Collections
+  const branchData = {
+    main: {
+      name: "Luxury Elite Studio (Main Branch)",
+      address: "102, Royal Palace Enclave, Luxury District",
+      timings: "10:00 AM - 8:30 PM (Daily)",
+      mapHint: "Centrally located with dedicated underground parking space available."
+    },
+    express: {
+      name: "Glow & Go Express Lounge",
+      address: "Ground Floor, Terminal Galleria Mall",
+      timings: "11:00 AM - 9:30 PM (Daily)",
+      mapHint: "Perfect for quick touch-ups, directly adjacent to the central fountain elevator."
     }
   };
 
-  const toggleFaq = (index) => {
-    setActiveFaq(activeFaq === index ? null : index);
+  const premiumServices = [
+    { id: "bridal", label: "Bridal / Occasion Makeover" },
+    { id: "hair", label: "Advanced Hair Styling & Balayage" },
+    { id: "skin", label: "Medi-Facials & Radiant Skin Therapies" },
+    { id: "nail", label: "Luxury Nail Extension Artistry" },
+    { id: "spa", label: "Deep Tissue Relaxation Therapy" }
+  ];
+
+  const premiumFaqs = [
+    {
+      id: 1,
+      question: "Do I need to secure an advance appointment for casual hair styling?",
+      answer: "While we warmly accommodate walk-in guests whenever open slots are available, we strongly advocate booking your appointment at least 24 to 48 hours in advance. This guarantees your priority slot and matching with your preferred stylist without wait time."
+    },
+    {
+      id: 2,
+      question: "Can I easily reschedule or cancel my treatment slot?",
+      answer: "Absolutely. We understand schedules fluidly change. You can effortlessly update or cancel your booking by tapping our WhatsApp direct link or placing a voice call at least 4 hours prior to your scheduled treatment time."
+    },
+    {
+      id: 3,
+      question: "Are your artists specialized in high-definition bridal makeovers?",
+      answer: "Yes, our studio boasts senior bridal master-artists globally trained in high-definition, airbrush, and long-wear luxury makeup styles. We also host pre-wedding consultation packages via our WhatsApp channels."
+    },
+    {
+      id: 4,
+      question: "What hygiene benchmarks are followed at your salon branches?",
+      answer: "Hygiene remains our uncompromised crown priority. Every tool undergoes multi-stage medical autoclave sterilization, single-use premium linen sheets are deployed for every client, and work surfaces are deeply sanitized between client consultations."
+    }
+  ];
+
+  // Intersection Observer implementation simulated via mount cycles
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setAnimatedElements(prev => [...prev, 'hero']), 100),
+      setTimeout(() => setAnimatedElements(prev => [...prev, 'panels']), 300),
+      setTimeout(() => setAnimatedElements(prev => [...prev, 'cards']), 500),
+      setTimeout(() => setAnimatedElements(prev => [...prev, 'faqs']), 700)
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // Safe Universal Communication Link Generative Functions
+  const generateWhatsAppLink = () => {
+    let messageText = "Hello! I would like to book a luxury appointment at your salon.";
+    if (selectedService) {
+      const serviceLabel = premiumServices.find(s => s.id === selectedService)?.label;
+      messageText += ` I am specifically looking forward to booking a session for: ${serviceLabel}.`;
+    }
+    messageText += ` Preferred Branch location: ${branchData[selectedBranch].name}. Please guide me with availability.`;
+    return `https://wa.me/91${phoneNumber}?text=${encodeURIComponent(messageText)}`;
   };
 
-  const faqData = [
-    { q: "Do I need to book an appointment?", a: "Yes. Appointments help us provide personalized service and reduce waiting time." },
-    { q: "Do you provide bridal makeup at the venue?", a: "Yes. We provide both in-salon and destination bridal makeup services." },
-    { q: "Which beauty brands do you use?", a: "We use premium international and professional beauty products that are skin-friendly and long-lasting." },
-    { q: "Do you provide trial bridal makeup?", a: "Yes. Trial sessions are available before your wedding day." },
-    { q: "Can I customize bridal packages?", a: "Absolutely. Our bridal packages are fully customizable according to your needs and budget." },
-    { q: "How can I contact Look Well Parlor?", a: "You can call us on +91 77209 29132 or visit us at Sindhi Camp, Pakki Kholi, Near Patel." }
-  ];
+  const handleCallExecution = (e) => {
+    // Interceptor logging can be placed here if integration tracking is necessary
+    window.location.href = `tel:${phoneNumber}`;
+  };
 
-  const reviewData = [
-    { name: "Ananya Sharma", role: "Elite Bride", review: "The premium bridal package made me feel like royalty on my wedding day. The glassmorphism and ambient care here is exceptional!" },
-    { name: "Priya Patel", role: "Regular Client", review: "Their hair spa treatments and premium balayage transformation services are world-class. Absolute value for money luxury." },
-    { name: "Riya Deshmukh", role: "Bridal Client", review: "The flawless airbrush makeup exceeded my wild expectations. Skin-friendly products that lasted well over 14 hours!" }
-  ];
+  const toggleFaqAccordion = (id) => {
+    setActiveFaq(activeFaq === id ? null : id);
+  };
+
+  const handleServiceSelect = (id) => {
+    setSelectedService(id);
+    setIsServiceDropdownOpen(false);
+  };
 
   return (
-    <div className="luxe-contact-page">
-      {/* ==========================================================================
-         SECTION 1: LUXURY HERO BANNER
-         ========================================================================== */}
-      <section className="luxe-contact-hero">
-        <div className="hero-floating-elements" aria-hidden="true">
-          <div className="petal p1">🌸</div>
-          <div className="petal p2">✨</div>
-          <div className="petal p3">🌸</div>
-          <div className="glow-circle gc1"></div>
-          <div className="glow-circle gc2"></div>
-        </div>
+    <div className="salon-ultimate-contact-root">
+      
+      {/* Dynamic Ambient Abstract Lights */}
+      <div className="ambient-blur-element magenta-glow"></div>
+      <div className="ambient-blur-element rose-gold-glow"></div>
+      <div className="ambient-blur-element deep-maroon-glow"></div>
 
-        <div className="luxe-contact-hero__container">
-          <div className="luxe-contact-hero__left">
-            <span className="luxe-tagline">Where Elegance Meets Perfection</span>
-            <h1 className="luxe-hero-heading">Let's Make You <br /><span className="luxe-accent-text">Look Beautiful</span></h1>
-            <p className="luxe-hero-paragraph">
-              Have questions about our bridal packages, party makeup, skincare, hair styling, or appointments? Our beauty experts are always happy to assist you.
-            </p>
-            <div className="luxe-hero-buttons">
-              <button className="btn-luxe btn-luxe--gradient">Book Appointment</button>
-              <button className="btn-luxe btn-luxe--outline">Call Now</button>
-            </div>
+      <main className="salon-contact-content-canvas">
+        
+        {/* ==========================================
+            SECTION 1: THE ELITE BRAND HERO TEXT 
+           ========================================== */}
+        <section 
+          className={`salon-contact-hero-block ${animatedElements.includes('hero') ? 'fade-slide-up-active' : 'fade-slide-up-hidden'}`}
+        >
+          <div className="premium-tagline-capsule">
+            <span className="tagline-sparkle">✨</span>
+            <span className="tagline-text">Pure Indulgence & Luxury Craftsmanship</span>
           </div>
+          <h1 className="salon-main-display-title">
+            Begin Your Transcendent <br />
+            <span className="gradient-text-accent">Beauty Journey</span>
+          </h1>
+          <p className="salon-hero-descriptive-para">
+            Experience unmitigated pampering curated by world-class beauty artisans. Avoid queues completely by executing an instantaneous priority appointment reservation through our hotlines below.
+          </p>
+        </section>
 
-          <div className="luxe-contact-hero__right">
-            <div className="luxury-illustration-card">
-              <div className="illustration-inner-circle">
-                <span>Look Well Ateliers</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==========================================================================
-         SECTION 2: CONTACT INFORMATION CARDS
-         ========================================================================== */}
-      <section className="luxe-info-section luxe-fade-up">
-        <div className="luxe-info-grid">
-          <div className="info-glass-card">
-            <div className="info-icon">📍</div>
-            <h3>Address</h3>
-            <p>Sindhi Camp, Pakki Kholi, Near Patel, India</p>
-          </div>
-          <div className="info-glass-card">
-            <div className="info-icon">📞</div>
-            <h3>Phone</h3>
-            <p>+91 77209 29132</p>
-          </div>
-          <div className="info-glass-card">
-            <div className="info-icon">✉️</div>
-            <h3>Email</h3>
-            <p>lookwellparlor@gmail.com</p>
-          </div>
-          <div className="info-glass-card">
-            <div className="info-icon">⏳</div>
-            <h3>Working Hours</h3>
-            <p>Monday – Sunday <br />9:00 AM – 8:00 PM</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ==========================================================================
-         SECTION 3: CONTACT FORM SECTOR
-         ========================================================================== */}
-      <section className="luxe-form-section luxe-fade-up">
-        <div className="luxe-form-container">
-          <div className="luxe-form-left-visual">
-            <div className="visual-image-overlay">
-              <h2>Experience True Royalty</h2>
-            </div>
-          </div>
+        {/* ==========================================
+            SECTION 2: CORE DUAL-PANEL LAYOUT 
+           ========================================== */}
+        <section 
+          className={`salon-interactive-dual-grid ${animatedElements.includes('panels') ? 'fade-slide-up-active' : 'fade-slide-up-hidden'}`}
+        >
           
-          <div className="luxe-form-right-content">
-            <h2>Send Us A Message</h2>
-            <form onSubmit={handleFormSubmit} className="luxe-interactive-form">
-              <div className="input-group">
-                <input 
-                  type="text" 
-                  name="fullName" 
-                  value={formData.fullName} 
-                  onChange={handleInputChange} 
-                  required 
-                  placeholder=" " 
-                />
-                <label>Full Name</label>
+          {/* PANEL A: ARTISTIC IMAGERY & BRAND VALUE STATEMENT */}
+          <div className="salon-branding-visual-panel">
+            <div className="visual-panel-background-image-mask"></div>
+            <div className="visual-panel-tint-overlay"></div>
+            
+            <div className="visual-panel-content-hierarchy">
+              <div className="studio-mini-badge-row">
+                <span className="mini-glass-badge">ISO 9001 Sanitized</span>
+                <span className="mini-glass-badge">Award Winning Team</span>
               </div>
 
-              <div className="input-group">
-                <input 
-                  type="email" 
-                  name="email" 
-                  value={formData.email} 
-                  onChange={handleInputChange} 
-                  required 
-                  placeholder=" " 
-                />
-                <label>Email Address</label>
+              <div className="visual-hero-typography">
+                <h3 className="visual-panel-serif-title">Where Perfection <br />Meets Elegance.</h3>
+                <p className="visual-panel-body-prose">
+                  Every swipe, highlight, cut, and treatment is designed precisely around your anatomical profile, bringing out your organic inner glow.
+                </p>
               </div>
 
-              <div className="input-group">
-                <input 
-                  type="tel" 
-                  name="phone" 
-                  value={formData.phone} 
-                  onChange={handleInputChange} 
-                  required 
-                  placeholder=" " 
-                />
-                <label>Phone Number</label>
+              {/* Dynamic Branch Details Subcard */}
+              <div className="interactive-branch-subcard-glass">
+                <div className="branch-selector-tab-header">
+                  <button 
+                    type="button"
+                    className={`branch-toggle-tab ${selectedBranch === 'main' ? 'tab-state-active' : ''}`}
+                    onClick={() => setSelectedBranch('main')}
+                  >
+                    Main Hub
+                  </button>
+                  <button 
+                    type="button"
+                    className={`branch-toggle-tab ${selectedBranch === 'express' ? 'tab-state-active' : ''}`}
+                    onClick={() => setSelectedBranch('express')}
+                  >
+                    Express Lounge
+                  </button>
+                </div>
+
+                <div className="branch-tab-body-render">
+                  <h4 className="branch-render-title">{branchData[selectedBranch].name}</h4>
+                  <div className="branch-meta-item">
+                    <svg className="meta-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <p className="branch-meta-text">{branchData[selectedBranch].address}</p>
+                  </div>
+                  <div className="branch-meta-item">
+                    <svg className="meta-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <p className="branch-meta-text">{branchData[selectedBranch].timings}</p>
+                  </div>
+                  <p className="branch-hint-text-italic">*{branchData[selectedBranch].mapHint}</p>
+                </div>
               </div>
 
-              <div className="input-group">
-                <select name="service" value={formData.service} onChange={handleInputChange} required>
-                  <option value="" disabled hidden></option>
-                  <option value="bridal">Bridal Makeup</option>
-                  <option value="party">Party Makeup</option>
-                  <option value="hair-styling">Hair Styling</option>
-                  <option value="hair-spa">Hair Spa</option>
-                  <option value="facial">Facial</option>
-                  <option value="skin-care">Skin Care</option>
-                  <option value="nail-art">Nail Art</option>
-                </select>
-                <label className="select-label">Select Service</label>
+            </div>
+          </div>
+
+          {/* PANEL B: THE CALL-TO-ACTION REVOLUTION CONTROL CENTRE */}
+          <div className="salon-booking-actions-panel">
+            <div className="actions-panel-header-wrapper">
+              <h2 className="actions-panel-header-title">Instant Reservation Engine</h2>
+              <p className="actions-panel-header-subtitle">
+                Select a specific target premium treatment category below to customize your instant reservation route metadata automatically.
+              </p>
+            </div>
+
+            {/* Custom Styled Beauty Dropdown Menu Component */}
+            <div className="custom-beauty-dropdown-container">
+              <label className="dropdown-input-label-capsule">Desired Luxury Treatment (Optional)</label>
+              
+              <div 
+                className={`custom-dropdown-trigger-field ${isServiceDropdownOpen ? 'trigger-field-focused' : ''}`}
+                onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
+              >
+                <div className="trigger-selected-display-value">
+                  {selectedService 
+                    ? premiumServices.find(s => s.id === selectedService)?.label 
+                    : "— Browse Treatments & Custom Stylists —"
+                  }
+                </div>
+                <div className={`trigger-chevron-indicator-icon ${isServiceDropdownOpen ? 'chevron-rotated' : ''}`}>
+                  <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="1 1 7 7 13 1" />
+                  </svg>
+                </div>
               </div>
 
-              <div className="input-group">
-                <textarea 
-                  name="message" 
-                  value={formData.message} 
-                  onChange={handleInputChange} 
-                  required 
-                  placeholder=" "
-                ></textarea>
-                <label>Your Message</label>
-              </div>
+              {isServiceDropdownOpen && (
+                <ul className="custom-dropdown-options-floating-list animate-dropdown-slide-down">
+                  <li 
+                    className={`dropdown-option-row-item ${selectedService === '' ? 'option-row-selected' : ''}`}
+                    onClick={() => handleServiceSelect('')}
+                  >
+                    Clear Service Selection (General Consultation)
+                  </li>
+                  {premiumServices.map((service) => (
+                    <li
+                      key={service.id}
+                      className={`dropdown-option-row-item ${selectedService === service.id ? 'option-row-selected' : ''}`}
+                      onClick={() => handleServiceSelect(service.id)}
+                    >
+                      {service.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-              <button type="submit" className="btn-luxe btn-luxe--gradient form-submit-btn">
-                Submit Message
+            {/* ACTION ELEMENTS INTERACTIVE CARD LIST STACK */}
+            <div className={`action-buttons-interactive-stack ${animatedElements.includes('cards') ? 'cards-stack-in' : ''}`}>
+              
+              {/* PRIMARY INTERACTIVE CHANNEL: WHATSAPP RESERVATION */}
+              <a 
+                href={generateWhatsAppLink()}
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="salon-premium-action-card-anchor whatsapp-channel-theme"
+              >
+                <div className="action-card-flex-structural-core">
+                  
+                  {/* Dynamic Glowing Icon Frame */}
+                  <div className="action-card-icon-outer-ring">
+                    <div className="action-card-icon-inner-fill">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="svg-stroke-icon">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Card Content Data Block */}
+                  <div className="action-card-descriptive-text-block">
+                    <div className="card-heading-row-wrapper">
+                      <h3 className="card-main-action-heading">Book Appointment</h3>
+                      <span className="card-badge-status status-online">Instant Booking</span>
+                    </div>
+                    <p className="card-supporting-explanatory-prose">
+                      Launches an encrypted real-time chat with our scheduling receptionist. Ideal for sending style references or choosing times.
+                    </p>
+                    <div className="card-cta-action-trigger-line">
+                      <span className="cta-action-text-string">Initiate WhatsApp Chat</span>
+                      <span className="cta-animated-arrow-symbol">→</span>
+                    </div>
+                  </div>
+
+                </div>
+                {/* Micro-Interaction Card Corner Hover Line */}
+                <div className="card-hover-border-accent-line"></div>
+              </a>
+
+              {/* SECONDARY INTERACTIVE CHANNEL: DIRECT TELEPHONY VOICE LINE */}
+              <button 
+                type="button" 
+                onClick={handleCallExecution}
+                className="salon-premium-action-card-anchor voice-channel-theme-button"
+              >
+                <div className="action-card-flex-structural-core">
+                  
+                  {/* Dynamic Glowing Icon Frame */}
+                  <div className="action-card-icon-outer-ring">
+                    <div className="action-card-icon-inner-fill">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="svg-stroke-icon">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Card Content Data Block */}
+                  <div className="action-card-descriptive-text-block">
+                    <div className="card-heading-row-wrapper">
+                      <h3 className="card-main-action-heading">Call Now</h3>
+                      <span className="card-badge-status status-tollfree">Direct Voice</span>
+                    </div>
+                    <p className="card-supporting-explanatory-prose">
+                      Connect with our operational concierge line instantly via cell network to address special custom styling inquiries.
+                    </p>
+                    <div className="card-cta-action-trigger-line">
+                      <span className="cta-action-text-string">Dial Ringline: {formattedDisplayNumber}</span>
+                      <span className="cta-animated-arrow-symbol">→</span>
+                    </div>
+                  </div>
+
+                </div>
+                {/* Micro-Interaction Card Corner Hover Line */}
+                <div className="card-hover-border-accent-line"></div>
               </button>
 
-              {formSubmitted && (
-                <div className="form-success-toast">
-                  ✨ Thank you! Your luxury appointment query has been dispatched safely.
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* ==========================================================================
-         SECTION 4: GOOGLE MAP SECTION
-         ========================================================================== */}
-      <section className="luxe-map-section luxe-fade-up">
-        <div className="luxe-map-card">
-          <h2>Visit Our Beauty Studio</h2>
-          <p>Sindhi Camp, Pakki Kholi, Near Patel, India</p>
-          <div className="map-frame-placeholder">
-            <div className="map-pins-indicator">📍</div>
-            <span>Google Maps Interactive Integration Block</span>
-          </div>
-          <button className="btn-luxe btn-luxe--outline directions-btn">Get Directions</button>
-        </div>
-      </section>
-
-      {/* ==========================================================================
-         SECTION 5: FREQUENTLY ASKED QUESTIONS (ACCORDION)
-         ========================================================================== */}
-      <section className="luxe-faq-section luxe-fade-up">
-        <div className="faq-wrapper">
-          <h2 className="section-title-centered">Frequently Asked Questions</h2>
-          <div className="luxe-accordion">
-            {faqData.map((item, index) => (
-              <div 
-                key={index} 
-                className={`accordion-item ${activeFaq === index ? 'accordion-item--active' : ''}`}
-                onClick={() => toggleFaq(index)}
-              >
-                <div className="accordion-trigger">
-                  <h3>{item.q}</h3>
-                  <span className="accordion-icon">✦</span>
-                </div>
-                <div className="accordion-content">
-                  <p>{item.a}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==========================================================================
-         SECTION 6: CUSTOMER REVIEWS
-         ========================================================================== */}
-      <section className="luxe-reviews-section luxe-fade-up">
-        <h2 className="section-title-centered">Loved By Connoisseurs</h2>
-        <div className="reviews-grid">
-          {reviewData.map((review, idx) => (
-            <div key={idx} className="review-glass-card">
-              <span className="quote-badge">“</span>
-              <div className="stars-row">★★★★★</div>
-              <p className="review-text">{review.review}</p>
-              <div className="review-profile">
-                <div className="profile-placeholder"></div>
-                <div>
-                  <h4>{review.name}</h4>
-                  <p>{review.role}</p>
-                </div>
-              </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* ==========================================================================
-         SECTION 7: CALL TO ACTION
-         ========================================================================== */}
-      <section className="luxe-cta-section luxe-fade-up">
-        <div className="cta-banner-card">
-          <h2>Ready To Experience Luxury Beauty?</h2>
-          <p>Book your appointment today and let our professionals transform your beauty into confidence.</p>
-          <button className="btn-luxe btn-luxe--gradient cta-btn">Book Appointment</button>
-        </div>
-      </section>
-
-      {/* ==========================================================================
-         SECTION 8: FOOTER PREVIEW
-         ========================================================================== */}
-      <footer className="luxe-contact-footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <h2>Look Well</h2>
-            <p>Timeless luxury, bridal heritage, and transformative beauty artistry.</p>
-          </div>
-          <div className="footer-links">
-            <h3>Quick Links</h3>
-            <ul>
-              <li>Home</li>
-              <li>Services</li>
-              <li>Premium Collection</li>
-              <li>Contact</li>
-            </ul>
-          </div>
-          <div className="footer-details">
-            <h3>Contact Details</h3>
-            <p>📞 +91 77209 29132</p>
-            <p>✉️ lookwellparlor@gmail.com</p>
-          </div>
-          <div className="footer-newsletter">
-            <h3>Newsletter</h3>
-            <div className="footer-input-box">
-              <input type="email" placeholder="Your Email Address" />
-              <button>Join</button>
+            {/* Subtle Brand Disclaimer and Assurance block */}
+            <div className="salon-brand-assurance-footer-notice">
+              <div className="assurance-shield-icon-wrapper">
+                <svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="#c2185b" strokeWidth="1.5">
+                  <path d="M8 1L1 4V9C1 13.42 4 17.5 8 18C12 17.5 15 13.42 15 9V4L8 1Z" />
+                </svg>
+              </div>
+              <p className="assurance-notice-text-content">
+                Your direct mobile reach out is entirely unspammed. Data remains rigorously protected under strict internal privacy parameters.
+              </p>
             </div>
+
           </div>
-        </div>
-        <div className="footer-bottom">
-          <p>&copy; 2026 Look Well Parlor Ateliers. All Rights Reserved.</p>
-        </div>
-      </footer>
+
+        </section>
+
+        {/* ==========================================
+            SECTION 3: ACCORDION BASED FAQ INTERFACE
+           ========================================== */}
+        <section 
+          className={`salon-faq-accordion-section-block ${animatedElements.includes('faqs') ? 'fade-slide-up-active' : 'fade-slide-up-hidden'}`}
+        >
+          <div className="faq-section-header-alignment">
+            <span className="faq-mini-pretitle">Common Clarifications</span>
+            <h2 className="faq-main-section-title">Frequently Asked Questions</h2>
+            <div className="horizontal-decorative-divider-bar"></div>
+          </div>
+
+          <div className="faq-accordion-structural-container-wrapper">
+            {premiumFaqs.map((faq) => {
+              const isOpen = activeFaq === faq.id;
+              return (
+                <div 
+                  key={faq.id} 
+                  className={`faq-accordion-individual-row-item ${isOpen ? 'accordion-row-state-expanded' : 'accordion-row-state-collapsed'}`}
+                >
+                  <button
+                    type="button"
+                    className="faq-accordion-trigger-button-element"
+                    onClick={() => toggleFaqAccordion(faq.id)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="faq-question-text-node">{faq.question}</span>
+                    <span className={`faq-accordion-plus-minus-cross-indicator ${isOpen ? 'indicator-rotated-x' : ''}`}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M6 1V11M1 6H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+
+                  <div 
+                    className="faq-accordion-hidden-collapsible-panel-wrapper"
+                    style={{ 
+                      maxHeight: isOpen ? '250px' : '0px',
+                      opacity: isOpen ? 1 : 0,
+                      visibility: isOpen ? 'visible' : 'hidden'
+                    }}
+                  >
+                    <div className="faq-accordion-inner-body-padded-content">
+                      <p className="faq-answer-paragraph-render-node">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+      </main>
     </div>
   );
 };

@@ -1,739 +1,1243 @@
-/* ==========================================================================
-   LUXURY BRANDING SYSTEM SPECIFICATION
-   ========================================================================== */
-:root {
-  --clr-white: #FFFFFF;
-  --clr-maroon: #6A1027;
-  --clr-rose-pink: #E83E6D;
-  --clr-blush-pink: #FCE7EF;
-  --clr-rose-gold: #D89CA4;
-  --clr-champagne: #C8A96A;
-  --clr-dark-text: #2C2526;
-  
-  /* Luxury Linear Gradients */
-  --grad-primary-pink: linear-gradient(135deg, #E83E6D 0%, #6A1027 100%);
-  --grad-hero-white: linear-gradient(180deg, #FFFFFF 0%, #FCE7EF 100%);
-  
-  /* Advanced Layer Micro Shadows */
-  --shd-luxury: 0 20px 40px rgba(106, 16, 39, 0.05);
-  --shd-glow-pink: 0 0 25px rgba(232, 62, 109, 0.35);
-  --shd-glass: 0 8px 32px 0 rgba(216, 156, 164, 0.12);
-
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Montserrat', sans-serif;
-  --transition-luxe: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Base Optimization Layer */
-.luxe-contact-page {
-  background-color: #FFFDFE;
-  color: var(--clr-dark-text);
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-/* ==========================================================================
-   SECTION 1: HERO CONTAINER & PETAL KEYFRAMES
-   ========================================================================== */
-.luxe-contact-hero {
-  position: relative;
-  height: 65vh;
-  min-height: 550px;
-  background: var(--grad-hero-white);
-  display: flex;
-  align-items: center;
-  padding: 0 10%;
-  overflow: hidden;
-}
-
-.luxe-contact-hero__container {
-  width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  align-items: center;
-  gap: 40px;
-  z-index: 5;
-}
-
-.luxe-tagline {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: var(--clr-maroon);
-  font-weight: 600;
-  display: block;
-  margin-bottom: 12px;
-}
-
-.luxe-hero-heading {
-  font-family: var(--font-serif);
-  font-size: 3.5rem;
-  line-height: 1.15;
-  color: var(--clr-maroon);
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-.luxe-accent-text {
-  color: var(--clr-rose-pink);
-  font-weight: 600;
-}
-
-.luxe-hero-paragraph {
-  font-size: 1.05rem;
-  color: #554A4D;
-  max-width: 550px;
-  margin-bottom: 35px;
-}
-
-/* Reusable Interactive Button Configurations */
-.btn-luxe {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 16px 36px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: var(--transition-luxe);
-}
-
-.btn-luxe--gradient {
-  background: var(--grad-primary-pink);
-  color: var(--clr-white);
-  border: none;
-  box-shadow: 0 10px 25px rgba(232, 62, 109, 0.2);
-}
-
-.btn-luxe--gradient:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shd-glow-pink);
-}
-
-.btn-luxe--outline {
-  background: transparent;
-  color: var(--clr-maroon);
-  border: 1.5px solid var(--clr-rose-gold);
-  margin-left: 15px;
-}
-
-.btn-luxe--outline:hover {
-  background: var(--clr-maroon);
-  color: var(--clr-white);
-  border-color: var(--clr-maroon);
-  transform: translateY(-4px);
-}
-
-/* Right Illustration Element Layout */
-.luxury-illustration-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  height: 350px;
-  border-radius: 30px;
-  box-shadow: var(--shd-glass);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: floatCard 6s infinite ease-in-out;
-}
-
-.illustration-inner-circle {
-  width: 180px;
-  height: 180px;
-  border: 1px dashed var(--clr-champagne);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--clr-champagne);
-  font-family: var(--font-serif);
-  letter-spacing: 1.5px;
-}
-
-/* Background Atmospheric Fluidity Effects */
-.hero-floating-elements .petal {
-  position: absolute;
-  opacity: 0.4;
-  pointer-events: none;
-  animation: floatPetal 8s infinite linear;
-}
-.p1 { top: 15%; left: 8%; font-size: 2rem; }
-.p2 { top: 60%; right: 12%; font-size: 1.5rem; animation-delay: 2s; }
-.p3 { bottom: 10%; left: 45%; font-size: 1.8rem; animation-delay: 4s; }
-
-.glow-circle {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(252,231,239,0.8) 0%, rgba(255,255,255,0) 70%);
-  z-index: 1;
-  pointer-events: none;
-}
-.gc1 { width: 350px; height: 350px; top: -10%; right: -5%; }
-.gc2 { width: 400px; height: 400px; bottom: -20%; left: -10%; }
-
-@keyframes floatCard {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes floatPetal {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  20% { opacity: 0.5; }
-  100% { transform: translateY(-80px) rotate(45deg); opacity: 0; }
-}
-
-/* ==========================================================================
-   SECTION 2: CONTACT INFORMATION GLASS CARDS
-   ========================================================================== */
-.luxe-info-section {
-  padding: 60px 10%;
-  margin-top: -50px;
-  position: relative;
-  z-index: 10;
-}
-
-.luxe-info-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.info-glass-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  padding: 40px 25px;
-  text-align: center;
-  box-shadow: var(--shd-glass);
-  transition: var(--transition-luxe);
-}
-
-.info-icon {
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
-  display: inline-block;
-}
-
-.info-glass-card h3 {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--clr-maroon);
-  margin-bottom: 12px;
-}
-
-.info-glass-card p {
-  font-size: 0.9rem;
-  color: #615557;
-}
-
-.info-glass-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(232, 62, 109, 0.1);
-  border-color: rgba(232, 62, 109, 0.2);
-}
-.info-glass-card:hover .info-icon {
-  transform: scale(1.15);
-}
-
-/* ==========================================================================
-   SECTION 3: CONTACT FORM SECTOR
-   ========================================================================== */
-.luxe-form-section {
-  padding: 80px 10%;
-}
-
-.luxe-form-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: var(--clr-white);
-  border-radius: 28px;
-  box-shadow: var(--shd-luxury);
-  display: grid;
-  grid-template-columns: 0.90fr 1.1fr;
-  overflow: hidden;
-}
-
-.luxe-form-left-visual {
-  background: linear-gradient(rgba(106, 16, 27, 0.2), rgba(106, 16, 27, 0.5)), 
-              url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=700&q=80');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-end;
-  padding: 50px;
-}
-
-.visual-image-overlay h2 {
-  font-family: var(--font-serif);
-  color: var(--clr-white);
-  font-size: 2.5rem;
-  line-height: 1.2;
-}
-
-.luxe-form-right-content {
-  padding: 60px;
-}
-
-.luxe-form-right-content h2 {
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
-  color: var(--clr-maroon);
-  margin-bottom: 40px;
-}
-
-/* Luxury Material Form Mechanics with Floating Labels */
-.luxe-interactive-form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.input-group {
-  position: relative;
-  width: 100%;
-}
-
-.input-group input,
-.input-group select,
-.input-group textarea {
-  width: 100%;
-  padding: 14px 20px;
-  background: var(--clr-blush-pink);
-  border: 1px solid transparent;
-  border-radius: 12px;
-  outline: none;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  color: var(--clr-dark-text);
-  transition: var(--transition-luxe);
-}
-
-.input-group textarea {
-  height: 120px;
-  resize: none;
-}
-
-/* Input Trigger States */
-.input-group input:focus,
-.input-group select:focus,
-.input-group textarea:focus {
-  background: var(--clr-white);
-  border-color: var(--clr-rose-pink);
-  box-shadow: 0 0 10px rgba(232, 62, 109, 0.1);
-}
-
-.input-group label {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #8c7b7e;
-  pointer-events: none;
-  transition: 0.3s ease all;
-}
-
-.input-group textarea ~ label {
-  top: 25px;
-}
-
-/* Labels float dynamically based on placeholder criteria */
-.input-group input:focus ~ label,
-.input-group input:not(:placeholder-shown) ~ label,
-.input-group textarea:focus ~ label,
-.input-group textarea:not(:placeholder-shown) ~ label,
-.input-group select:focus ~ label,
-.input-group select:valid ~ label {
-  top: -12px;
-  left: 10px;
-  font-size: 0.8rem;
-  color: var(--clr-rose-pink);
-  font-weight: 600;
-  background: var(--clr-white);
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.form-submit-btn {
-  width: 100%;
-  padding: 16px;
-}
-
-.form-success-toast {
-  background-color: #E6F7ED;
-  color: #1E633F;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-/* ==========================================================================
-   SECTION 4: GOOGLE MAP SECTION
-   ========================================================================== */
-.luxe-map-section {
-  padding: 60px 10%;
-}
-
-.luxe-map-card {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: var(--clr-white);
-  padding: 50px;
-  border-radius: 28px;
-  box-shadow: var(--shd-luxury);
-  text-align: center;
-}
-
-.luxe-map-card h2 {
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
-  color: var(--clr-maroon);
-}
-
-.luxe-map-card p {
-  color: #7A696C;
-  margin-bottom: 30px;
-}
-
-.map-frame-placeholder {
-  height: 400px;
-  background: #F5EAEF;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--clr-maroon);
-  font-weight: 500;
-  border: 1px dashed var(--clr-rose-gold);
-}
-
-.map-pins-indicator {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  animation: floatCard 4s infinite ease-in-out;
-}
-
-.directions-btn {
-  margin-top: 30px;
-}
-
-/* ==========================================================================
-   SECTION 5: FREQUENTLY ASKED QUESTIONS (ACCORDION MATRIX)
-   ========================================================================== */
-.luxe-faq-section {
-  padding: 80px 10%;
-  background-color: var(--clr-blush-pink);
-}
-
-.faq-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.section-title-centered {
-  text-align: center;
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  color: var(--clr-maroon);
-  margin-bottom: 50px;
-}
-
-.luxe-accordion {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.accordion-item {
-  background: var(--clr-white);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(106, 16, 39, 0.02);
-  cursor: pointer;
-  transition: var(--transition-luxe);
-}
-
-.accordion-trigger {
-  padding: 24px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.accordion-trigger h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--clr-dark-text);
-}
-
-.accordion-icon {
-  color: var(--clr-rose-gold);
-  font-size: 1.2rem;
-  transition: transform 0.4s ease;
-}
-
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  padding: 0 30px;
-}
-
-.accordion-content p {
-  padding-bottom: 24px;
-  color: #615355;
-  font-size: 0.95rem;
-}
-
-/* Active Class Dynamic Mutation Rules */
-.accordion-item--active {
-  box-shadow: var(--shd-luxury);
-}
-.accordion-item--active .accordion-content {
-  max-height: 200px; /* Expands dynamically with interpolation animation */
-}
-.accordion-item--active .accordion-icon {
-  transform: rotate(45deg);
-  color: var(--clr-rose-pink);
-}
-
-/* ==========================================================================
-   SECTION 6: CUSTOMER REVIEWS
-   ========================================================================== */
-.luxe-reviews-section {
-  padding: 100px 10%;
-}
-
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.review-glass-card {
-  background: var(--clr-white);
-  border: 1px solid #F0E2E5;
-  border-radius: 24px;
-  padding: 40px;
-  position: relative;
-  box-shadow: var(--shd-luxury);
-  transition: var(--transition-luxe);
-}
-
-.quote-badge {
-  font-family: var(--font-serif);
-  font-size: 4rem;
-  color: var(--clr-blush-pink);
-  position: absolute;
-  top: 10px;
-  left: 30px;
-  line-height: 1;
-}
-
-.stars-row {
-  color: #F1C40F;
-  margin-bottom: 15px;
-  position: relative;
-  z-index: 2;
-}
-
-.review-text {
-  font-size: 0.95rem;
-  color: #55484A;
-  line-height: 1.7;
-  margin-bottom: 30px;
-  position: relative;
-  z-index: 2;
-}
-
-.review-profile {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.profile-placeholder {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: var(--clr-rose-gold);
-}
-
-.review-profile h4 {
-  font-size: 1rem;
-  color: var(--clr-maroon);
-}
-
-.review-profile p {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: var(--clr-rose-pink);
-}
-
-.review-glass-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(106, 16, 39, 0.06);
-}
-
-/* ==========================================================================
-   SECTION 7: CALL TO ACTION
-   ========================================================================== */
-.luxe-cta-section {
-  padding: 40px 10% 80px 10%;
-}
-
-.cta-banner-card {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: var(--grad-primary-pink);
-  border-radius: 32px;
-  padding: 80px 40px;
-  text-align: center;
-  color: var(--clr-white);
-  box-shadow: var(--shd-glow-pink);
-}
-
-.cta-banner-card h2 {
-  font-family: var(--font-serif);
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.cta-banner-card p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto 40px auto;
-}
-
-.cta-btn {
-  background: var(--clr-white);
-  color: var(--clr-maroon);
-}
-.cta-btn:hover {
-  background: var(--clr-blush-pink);
-  transform: scale(1.05);
-}
-
-/* ==========================================================================
-   SECTION 8: FOOTER LUXURY ENGINE
-   ========================================================================== */
-.luxe-contact-footer {
-  background: #1C040A;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 80px 10% 30px 10%;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr 1fr 1fr;
-  gap: 50px;
-  max-width: 1300px;
-  margin: 0 auto;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding-bottom: 50px;
-}
-
-.footer-brand h2 {
-  font-family: var(--font-serif);
-  color: var(--clr-white);
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.footer-content h3 {
-  font-family: var(--font-serif);
-  color: var(--clr-champagne);
-  font-size: 1.2rem;
-  margin-bottom: 25px;
-}
-
-.footer-links ul { list-style: none; }
-.footer-links li { margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
-.footer-links li:hover { color: var(--clr-rose-pink); }
-
-.footer-input-box {
-  display: flex;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  padding-bottom: 8px;
-}
-
-.footer-input-box input {
-  background: transparent;
-  border: none;
-  color: white;
-  outline: none;
-  width: 100%;
-}
-
-.footer-input-box button {
-  background: transparent;
-  border: none;
-  color: var(--clr-rose-pink);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 30px;
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.3);
-}
-
-/* ==========================================================================
-   INTERSECTION SCROLL INTERPOLATION RULES
-   ========================================================================== */
-.luxe-fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.luxe-fade-up--active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ==========================================================================
-   RESPONSIVE DESIGN BREAKPOINT LOGIC
-   ========================================================================== */
-@media (max-width: 1200px) {
-  .luxe-info-grid { grid-template-columns: repeat(2, 1fr); }
-  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
-  .footer-content { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 992px) {
-  .luxe-contact-hero { height: auto; padding: 100px 5%; }
-  .luxe-contact-hero__container { grid-template-columns: 1fr; text-align: center; }
-  .luxe-hero-paragraph { margin: 0 auto 35px auto; }
-  .luxe-hero-buttons { display: flex; justify-content: center; }
-  .luxe-form-container { grid-template-columns: 1fr; }
-  .luxe-form-left-visual { height: 250px; }
-}
-
-@media (max-width: 768px) {
-  .luxe-hero-heading { font-size: 2.6rem; }
-  .luxe-info-grid { grid-template-columns: 1fr; }
-  .reviews-grid { grid-template-columns: 1fr; }
-  .footer-content { grid-template-columns: 1fr; }
-  .cta-banner-card h2 { font-size: 2rem; }
-  .luxe-form-right-content { padding: 40px 20px; }
-  .btn-luxe { width: 100%; margin-left: 0; }
-  .btn-luxe--outline { margin-top: 15px; }
-  .luxe-hero-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
-}
+/**
+ * =========================================================================
+ * LUXURY SALON & PARLOUR EXPERIENCE CENTER - CONTACT PAGE CORE STYLESHEET
+ * SPECIFICATION: PRODUCTION-GRADE, ULTRA-PREMIUM, HIGHLY INTERACTIVE
+ * DESIGN PALETTE: DEEP MAGENTA, DUSKY ROSE, RICH CHAMPAGNE & HIGHLIGHT PINK
+ * =========================================================================
+ */
+
+/* -------------------------------------------------------------------------
+   1. RESET, BASE ARCHITECTURE & CORE DESIGN TOKENS
+   ------------------------------------------------------------------------- */
+   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+   :root {
+     /* Primary Color Architecture (Dark Pink Accent Spectrum) */
+     --salon-primary-deep-pink: #c2185b;
+     --salon-primary-hover-pink: #a3154c;
+     --salon-primary-ultra-dark: #4a051c;
+     --salon-primary-soft-pink: #fff0f3;
+     --salon-accent-rose-gold: #e5a9b4;
+     --salon-accent-blush: #fbeef1;
+     
+     /* Neutral Space Surface Spectrum */
+     --salon-bg-canvas: #fff9fa;
+     --salon-surface-pure-white: #ffffff;
+     --salon-surface-glass-base: rgba(255, 255, 255, 0.85);
+     --salon-surface-card-border: rgba(194, 24, 91, 0.12);
+     
+     /* Typography Palette */
+     --salon-text-primary-dark: #2c2124;
+     --salon-text-secondary-muted: #6e6467;
+     --salon-text-light-subtle: #a39699;
+     --salon-text-white-pure: #ffffff;
+     
+     /* Structural Shadow Architecture */
+     --salon-shadow-subtle-glow: 0 10px 35px rgba(194, 24, 91, 0.04);
+     --salon-shadow-premium-lift: 0 25px 60px -15px rgba(194, 24, 91, 0.1);
+     --salon-shadow-button-glow: 0 8px 25px rgba(194, 24, 91, 0.25);
+     --salon-shadow-glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.6);
+     
+     /* Dynamic Motion Variables */
+     --salon-transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+     --salon-transition-snappy: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+     --salon-transition-elastic: all 0.55s cubic-bezier(0.68, -0.65, 0.265, 1.55);
+   }
+   
+   /* Layer Structural Resets */
+   .salon-ultimate-contact-root {
+     min-height: 100vh;
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 80px 24px;
+     background-color: var(--salon-bg-canvas);
+     position: relative;
+     overflow: hidden;
+     box-sizing: border-box;
+     font-family: 'Plus Jakarta Sans', sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+   }
+   
+   .salon-ultimate-contact-root *,
+   .salon-ultimate-contact-root *::before,
+   .salon-ultimate-contact-root *::after {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+   }
+   
+   /* Canvas Main Container Wrapping Shell */
+   .salon-contact-content-canvas {
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+     display: flex;
+     flex-direction: column;
+     gap: 70px;
+     z-index: 5;
+     position: relative;
+   }
+   
+   /* -------------------------------------------------------------------------
+      2. AMBIENT BACKGROUND GLOW LIGHTS (LUXURY BLUR EFFECTS)
+      ------------------------------------------------------------------------- */
+   .ambient-blur-element {
+     position: absolute;
+     border-radius: 50%;
+     filter: blur(140px);
+     pointer-events: none;
+     z-index: 1;
+     opacity: 0.85;
+     mix-blend-mode: multiply;
+     animation: ambientPulse 12s infinite alternate ease-in-out;
+   }
+   
+   .magenta-glow {
+     top: -10%;
+     left: -5%;
+     width: 550px;
+     height: 550px;
+     background: radial-gradient(circle, rgba(194, 24, 91, 0.18) 0%, transparent 75%);
+     animation-delay: 0s;
+   }
+   
+   .rose-gold-glow {
+     bottom: -8%;
+     right: -5%;
+     width: 650px;
+     height: 650px;
+     background: radial-gradient(circle, rgba(229, 169, 180, 0.25) 0%, transparent 70%);
+     animation-delay: 3s;
+   }
+   
+   .deep-maroon-glow {
+     top: 40%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 450px;
+     height: 450px;
+     background: radial-gradient(circle, rgba(74, 5, 28, 0.05) 0%, transparent 80%);
+     animation-delay: 6s;
+   }
+   
+   @keyframes ambientPulse {
+     0% { transform: scale(1) translate(0px, 0px); opacity: 0.7; }
+     50% { transform: scale(1.12) translate(30px, -20px); opacity: 0.9; }
+     100% { transform: scale(0.95) translate(-15px, 40px); opacity: 0.6; }
+   }
+   
+   /* -------------------------------------------------------------------------
+      3. ENTRY TIMEOUT ANIMATION DEPLOYMENTS
+      ------------------------------------------------------------------------- */
+   .fade-slide-up-hidden {
+     opacity: 0;
+     transform: translateY(40px);
+     transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                 transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+   }
+   
+   .fade-slide-up-active {
+     opacity: 1;
+     transform: translateY(0);
+   }
+   
+   /* -------------------------------------------------------------------------
+      4. HERO BLOCK TYPOGRAPHY & CAPSULE ACCENTS
+      ------------------------------------------------------------------------- */
+   .salon-contact-hero-block {
+     text-align: center;
+     max-width: 800px;
+     margin: 0 auto;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+   }
+   
+   .premium-tagline-capsule {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     background: linear-gradient(135deg, rgba(194, 24, 91, 0.08) 0%, rgba(194, 24, 91, 0.03) 100%);
+     border: 1px solid rgba(194, 24, 91, 0.15);
+     padding: 8px 22px;
+     border-radius: 50px;
+     margin-bottom: 24px;
+     box-shadow: var(--salon-shadow-glass-inset);
+     transition: var(--salon-transition-snappy);
+   }
+   
+   .premium-tagline-capsule:hover {
+     background: rgba(194, 24, 91, 0.12);
+     transform: scale(1.02);
+   }
+   
+   .tagline-sparkle {
+     font-size: 1.1rem;
+     animation: iconSpin 3s infinite linear;
+   }
+   
+   .tagline-text {
+     font-size: 0.85rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     color: var(--salon-primary-deep-pink);
+   }
+   
+   .salon-main-display-title {
+     font-family: 'Playfair Display', serif;
+     font-size: 3.4rem;
+     color: var(--salon-text-primary-dark);
+     font-weight: 700;
+     line-height: 1.15;
+     letter-spacing: -0.5px;
+     margin-bottom: 20px;
+   }
+   
+   .gradient-text-accent {
+     background: linear-gradient(135deg, var(--salon-primary-deep-pink) 0%, var(--salon-primary-ultra-dark) 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     position: relative;
+   }
+   
+   .gradient-text-accent::after {
+     content: '';
+     position: absolute;
+     bottom: 4px;
+     left: 0;
+     width: 100%;
+     height: 2px;
+     background: linear-gradient(90deg, transparent, var(--salon-accent-rose-gold), transparent);
+   }
+   
+   .salon-hero-descriptive-para {
+     font-size: 1.15rem;
+     color: var(--salon-text-secondary-muted);
+     line-height: 1.7;
+     max-width: 680px;
+     font-weight: 400;
+   }
+   
+   /* -------------------------------------------------------------------------
+      5. DOUBLE-PANEL PLATFORM MAIN ARCHITECTURE GRID
+      ------------------------------------------------------------------------- */
+   .salon-interactive-dual-grid {
+     display: grid;
+     grid-template-columns: 1.15fr 1fr;
+     background: var(--salon-surface-glass-base);
+     backdrop-filter: blur(25px);
+     -webkit-backdrop-filter: blur(25px);
+     border-radius: 40px;
+     border: 1px solid var(--salon-surface-card-border);
+     box-shadow: var(--salon-shadow-premium-lift);
+     overflow: hidden;
+     position: relative;
+   }
+   
+   /* -------------------------------------------------------------------------
+      6. LEFT SIDE PANEL - LUXURY BRANDING & DYNAMIC BRANCH CARD
+      ------------------------------------------------------------------------- */
+   .salon-branding-visual-panel {
+     padding: 70px;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     position: relative;
+     overflow: hidden;
+     color: var(--salon-text-white-pure);
+   }
+   
+   /* Embedded High-Resolution Visual Backdrop Overlay Architecture */
+   .visual-panel-background-image-mask {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80');
+     background-size: cover;
+     background-position: center;
+     transition: transform 8s ease;
+     z-index: 1;
+   }
+   
+   .salon-interactive-dual-grid:hover .visual-panel-background-image-mask {
+     transform: scale(1.06);
+   }
+   
+   .visual-panel-tint-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(rgba(141, 11, 61, 0.5), rgba(42, 2, 16, 0.92));
+     z-index: 2;
+   }
+   
+   .visual-panel-content-hierarchy {
+     position: relative;
+     z-index: 3;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     gap: 50px;
+   }
+   
+   .studio-mini-badge-row {
+     display: flex;
+     gap: 12px;
+     flex-wrap: wrap;
+   }
+   
+   .mini-glass-badge {
+     font-size: 0.75rem;
+     font-weight: 600;
+     letter-spacing: 1px;
+     text-transform: uppercase;
+     background: rgba(255, 255, 255, 0.16);
+     backdrop-filter: blur(8px);
+     -webkit-backdrop-filter: blur(8px);
+     padding: 6px 16px;
+     border-radius: 50px;
+     border: 1px solid rgba(255, 255, 255, 0.2);
+     box-shadow: var(--salon-shadow-glass-inset);
+   }
+   
+   .visual-hero-typography {
+     max-width: 480px;
+   }
+   
+   .visual-panel-serif-title {
+     font-family: 'Playfair Display', serif;
+     font-size: 2.8rem;
+     line-height: 1.25;
+     font-weight: 500;
+     margin-bottom: 18px;
+     letter-spacing: 0.5px;
+     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+   }
+   
+   .visual-panel-body-prose {
+     font-size: 1.05rem;
+     line-height: 1.65;
+     color: rgba(255, 255, 255, 0.85);
+     font-weight: 300;
+   }
+   
+   /* Glassmorphism Hub Control Component Container */
+   .interactive-branch-subcard-glass {
+     background: rgba(255, 255, 255, 0.08);
+     backdrop-filter: blur(16px);
+     -webkit-backdrop-filter: blur(16px);
+     border-radius: 24px;
+     border: 1px solid rgba(255, 255, 255, 0.12);
+     padding: 24px;
+     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), var(--salon-shadow-glass-inset);
+     transition: var(--salon-transition-smooth);
+   }
+   
+   .interactive-branch-subcard-glass:hover {
+     background: rgba(255, 255, 255, 0.12);
+     border-color: rgba(255, 255, 255, 0.2);
+   }
+   
+   .branch-selector-tab-header {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     background: rgba(0, 0, 0, 0.2);
+     border-radius: 14px;
+     padding: 4px;
+     margin-bottom: 20px;
+     border: 1px solid rgba(255, 255, 255, 0.05);
+   }
+   
+   .branch-toggle-tab {
+     background: transparent;
+     border: none;
+     color: rgba(255, 255, 255, 0.65);
+     font-family: inherit;
+     font-size: 0.85rem;
+     font-weight: 600;
+     padding: 10px;
+     cursor: pointer;
+     border-radius: 10px;
+     transition: var(--salon-transition-snappy);
+   }
+   
+   .branch-toggle-tab:hover {
+     color: var(--salon-text-white-pure);
+   }
+   
+   .branch-toggle-tab.tab-state-active {
+     background: var(--salon-surface-pure-white);
+     color: var(--salon-primary-ultra-dark);
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+     font-weight: 700;
+   }
+   
+   /* Animated Component Interchanger Node Frame */
+   .branch-tab-body-render {
+     animation: subcardReveal 0.45s ease forwards;
+   }
+   
+   @keyframes subcardReveal {
+     from { opacity: 0; transform: translateY(10px); }
+     to { opacity: 1; transform: translateY(0); }
+   }
+   
+   .branch-render-title {
+     font-size: 1.15rem;
+     font-weight: 700;
+     margin-bottom: 14px;
+     color: var(--salon-text-white-pure);
+     letter-spacing: 0.2px;
+   }
+   
+   .branch-meta-item {
+     display: flex;
+     align-items: flex-start;
+     gap: 12px;
+     margin-bottom: 12px;
+   }
+   
+   .meta-svg-icon {
+     width: 16px;
+     height: 16px;
+     stroke: var(--salon-accent-rose-gold);
+     margin-top: 3px;
+     flex-shrink: 0;
+   }
+   
+   .branch-meta-text {
+     font-size: 0.9rem;
+     line-height: 1.5;
+     color: rgba(255, 255, 255, 0.85);
+     font-weight: 400;
+   }
+   
+   .branch-hint-text-italic {
+     font-size: 0.8rem;
+     color: var(--salon-accent-rose-gold);
+     font-style: italic;
+     margin-top: 14px;
+     font-weight: 300;
+     border-top: 1px solid rgba(255, 255, 255, 0.1);
+     padding-top: 10px;
+   }
+   
+   /* -------------------------------------------------------------------------
+      7. RIGHT SIDE PANEL - INSTANT RESERVATION PLATFORM CORE
+      ------------------------------------------------------------------------- */
+   .salon-booking-actions-panel {
+     padding: 70px 60px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     background: var(--salon-surface-pure-white);
+     position: relative;
+   }
+   
+   .actions-panel-header-wrapper {
+     margin-bottom: 35px;
+   }
+   
+   .actions-panel-header-title {
+     font-family: 'Playfair Display', serif;
+     font-size: 2.2rem;
+     color: var(--salon-text-primary-dark);
+     margin-bottom: 12px;
+     font-weight: 700;
+     letter-spacing: -0.2px;
+   }
+   
+   .actions-panel-header-subtitle {
+     font-size: 0.95rem;
+     color: var(--salon-text-secondary-muted);
+     line-height: 1.6;
+   }
+   
+   /* -------------------------------------------------------------------------
+      8. THE CUSTOM DESIGNED DROP COMPONENT STYLING SYSTEM
+      ------------------------------------------------------------------------- */
+   .custom-beauty-dropdown-container {
+     position: relative;
+     margin-bottom: 35px;
+     width: 100%;
+     z-index: 50;
+   }
+   
+   .dropdown-input-label-capsule {
+     display: block;
+     font-size: 0.75rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 1.5px;
+     color: var(--salon-primary-deep-pink);
+     margin-bottom: 10px;
+     padding-left: 4px;
+   }
+   
+   .custom-dropdown-trigger-field {
+     width: 100%;
+     padding: 16px 22px;
+     background: var(--salon-bg-canvas);
+     border: 1px solid rgba(194, 24, 91, 0.15);
+     border-radius: 16px;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     transition: var(--salon-transition-snappy);
+     user-select: none;
+   }
+   
+   .custom-dropdown-trigger-field:hover {
+     background: var(--salon-surface-pure-white);
+     border-color: var(--salon-primary-deep-pink);
+     box-shadow: 0 5px 15px rgba(194, 24, 91, 0.04);
+   }
+   
+   .trigger-field-focused {
+     background: var(--salon-surface-pure-white) !important;
+     border-color: var(--salon-primary-deep-pink) !important;
+     box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.08) !important;
+   }
+   
+   .trigger-selected-display-value {
+     font-size: 0.95rem;
+     font-weight: 600;
+     color: var(--salon-text-primary-dark);
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     padding-right: 15px;
+   }
+   
+   .trigger-chevron-indicator-icon {
+     color: var(--salon-primary-deep-pink);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   }
+   
+   .chevron-rotated {
+     transform: rotate(180deg);
+   }
+   
+   /* Floating Content Options Window Layer */
+   .custom-dropdown-options-floating-list {
+     position: absolute;
+     top: calc(100% + 8px);
+     left: 0;
+     width: 100%;
+     background: var(--salon-surface-pure-white);
+     border: 1px solid rgba(194, 24, 91, 0.15);
+     border-radius: 16px;
+     box-shadow: 0 20px 45px rgba(74, 5, 28, 0.12);
+     list-style: none;
+     overflow: hidden;
+     z-index: 100;
+     padding: 6px;
+   }
+   
+   .animate-dropdown-slide-down {
+     animation: dropdownFrameIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+     transform-origin: top center;
+   }
+   
+   @keyframes dropdownFrameIn {
+     from { opacity: 0; transform: scaleY(0.85); }
+     to { opacity: 1; transform: scaleY(1); }
+   }
+   
+   .dropdown-option-row-item {
+     padding: 14px 18px;
+     font-size: 0.95rem;
+     font-weight: 500;
+     color: var(--salon-text-secondary-muted);
+     border-radius: 10px;
+     cursor: pointer;
+     transition: var(--salon-transition-snappy);
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+   }
+   
+   .dropdown-option-row-item:hover {
+     background: var(--salon-accent-blush);
+     color: var(--salon-primary-deep-pink);
+     padding-left: 22px;
+   }
+   
+   .option-row-selected {
+     background: var(--salon-primary-soft-pink) !important;
+     color: var(--salon-primary-deep-pink) !important;
+     font-weight: 700;
+   }
+   
+   /* -------------------------------------------------------------------------
+      9. HIGH END ACTION BUTTON INTERACTIVE CHANNEL CARDS
+      ------------------------------------------------------------------------- */
+   .action-buttons-interactive-stack {
+     display: flex;
+     flex-direction: column;
+     gap: 22px;
+   }
+   
+   /* Core Uniform Anchor/Button Card Element */
+   .salon-premium-action-card-anchor {
+     display: block;
+     width: 100%;
+     text-align: left;
+     background: transparent;
+     border: none;
+     font-family: inherit;
+     text-decoration: none;
+     border-radius: 24px;
+     padding: 28px;
+     position: relative;
+     overflow: hidden;
+     cursor: pointer;
+     transition: var(--salon-transition-smooth);
+     border: 1px solid transparent;
+   }
+   
+   .action-card-flex-structural-core {
+     display: flex;
+     align-items: flex-start;
+     z-index: 3;
+     position: relative;
+   }
+   
+   /* Structural Configuration for WhatsApp Specific Channels */
+   .whatsapp-channel-theme {
+     background: var(--salon-primary-soft-pink);
+     border-color: rgba(194, 24, 91, 0.14);
+   }
+   
+   .whatsapp-channel-theme .action-card-icon-outer-ring {
+     background: rgba(194, 24, 91, 0.1);
+     border-color: rgba(194, 24, 91, 0.15);
+   }
+   
+   .whatsapp-channel-theme .action-card-icon-inner-fill {
+     background: var(--salon-primary-deep-pink);
+     color: var(--salon-surface-pure-white);
+     box-shadow: 0 6px 20px rgba(194, 24, 91, 0.25);
+   }
+   
+   /* Structural Configuration for Call Telephony Channels */
+   .voice-channel-theme-button {
+     background: var(--salon-surface-pure-white);
+     border-color: rgba(194, 24, 91, 0.14);
+     box-shadow: var(--salon-shadow-subtle-glow);
+   }
+   
+   .voice-channel-theme-button .action-card-icon-outer-ring {
+     background: var(--salon-bg-canvas);
+     border-color: rgba(194, 24, 91, 0.08);
+   }
+   
+   .voice-channel-theme-button .action-card-icon-inner-fill {
+     background: rgba(194, 24, 91, 0.08);
+     color: var(--salon-primary-deep-pink);
+   }
+   
+   /* Interactive Card Icon Structural Frame Blocks */
+   .action-card-icon-outer-ring {
+     width: 68px;
+     height: 68px;
+     border-radius: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border: 1px solid transparent;
+     margin-right: 22px;
+     flex-shrink: 0;
+     transition: var(--salon-transition-smooth);
+   }
+   
+   .action-card-icon-inner-fill {
+     width: 52px;
+     height: 52px;
+     border-radius: 16px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     transition: var(--salon-transition-elastic);
+   }
+   
+   .svg-stroke-icon {
+     transition: transform 0.4s ease;
+   }
+   
+   /* Descriptive Text Configuration Controls */
+   .action-card-descriptive-text-block {
+     flex-grow: 1;
+     padding-top: 2px;
+   }
+   
+   .card-heading-row-wrapper {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin-bottom: 8px;
+     flex-wrap: wrap;
+   }
+   
+   .card-main-action-heading {
+     font-size: 1.35rem;
+     font-weight: 700;
+     color: var(--salon-primary-ultra-dark);
+     letter-spacing: -0.2px;
+   }
+   
+   .card-badge-status {
+     font-size: 0.7rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.8px;
+     padding: 4px 10px;
+     border-radius: 50px;
+   }
+   
+   .status-online {
+     background: var(--salon-primary-deep-pink);
+     color: var(--salon-surface-pure-white);
+   }
+   
+   .status-tollfree {
+     background: rgba(194, 24, 91, 0.08);
+     color: var(--salon-primary-deep-pink);
+   }
+   
+   .card-supporting-explanatory-prose {
+     font-size: 0.9rem;
+     line-height: 1.5;
+     color: var(--salon-text-secondary-muted);
+     margin-bottom: 16px;
+     font-weight: 400;
+   }
+   
+   /* Interactive Label Links at Bottom of Cards */
+   .card-cta-action-trigger-line {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     transition: var(--salon-transition-snappy);
+   }
+   
+   .cta-action-text-string {
+     font-size: 0.95rem;
+     font-weight: 700;
+     color: var(--salon-primary-deep-pink);
+   }
+   
+   .cta-animated-arrow-symbol {
+     font-size: 1.2rem;
+     color: var(--salon-primary-deep-pink);
+     font-weight: 700;
+     transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   }
+   
+   /* Micro Interaction Dynamic Layer Enforcements on Hover */
+   .card-hover-border-accent-line {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     width: 0%;
+     height: 3px;
+     background: linear-gradient(90deg, var(--salon-primary-deep-pink), var(--salon-accent-rose-gold));
+     transition: width 0.4s ease;
+     z-index: 4;
+   }
+   
+   .salon-premium-action-card-anchor:hover {
+     transform: translateY(-6px);
+     border-color: rgba(194, 24, 91, 0.3) !important;
+     box-shadow: var(--salon-shadow-premium-lift) !important;
+   }
+   
+   .salon-premium-action-card-anchor:hover .card-hover-border-accent-line {
+     width: 100%;
+   }
+   
+   .salon-premium-action-card-anchor:hover .action-card-icon-outer-ring {
+     transform: rotate(5deg) scale(1.04);
+   }
+   
+   .salon-premium-action-card-anchor:hover .action-card-icon-inner-fill {
+     transform: scale(1.08);
+   }
+   
+   .whatsapp-channel-theme:hover .action-card-icon-inner-fill {
+     background: var(--salon-primary-hover-pink);
+   }
+   
+   .voice-channel-theme-button:hover .action-card-icon-inner-fill {
+     background: var(--salon-primary-deep-pink);
+     color: var(--salon-surface-pure-white);
+     box-shadow: var(--salon-shadow-button-glow);
+   }
+   
+   .salon-premium-action-card-anchor:hover .svg-stroke-icon {
+     transform: scale(1.05);
+   }
+   
+   .salon-premium-action-card-anchor:hover .cta-animated-arrow-symbol {
+     transform: translateX(6px);
+   }
+   
+   /* Core Inline Icon Standard Animations */
+   @keyframes iconSpin {
+     0% { transform: rotate(0deg); }
+     50% { transform: rotate(15deg) scale(1.1); }
+     100% { transform: rotate(0deg); }
+   }
+   
+   /* -------------------------------------------------------------------------
+      10. ASSURANCE SHIELD & PRIVACY FOOTER NOTE
+      ------------------------------------------------------------------------- */
+   .salon-brand-assurance-footer-notice {
+     margin-top: 35px;
+     display: flex;
+     align-items: center;
+     gap: 14px;
+     background: var(--salon-bg-canvas);
+     padding: 16px 20px;
+     border-radius: 16px;
+     border: 1px dashed rgba(194, 24, 91, 0.15);
+   }
+   
+   .assurance-shield-icon-wrapper {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+     animation: shieldFloat 3s infinite ease-in-out;
+   }
+   
+   @keyframes shieldFloat {
+     0% { transform: translateY(0); }
+     50% { transform: translateY(-3px); }
+     100% { transform: translateY(0); }
+   }
+   
+   .assurance-notice-text-content {
+     font-size: 0.8rem;
+     line-height: 1.5;
+     color: var(--salon-text-secondary-muted);
+     font-weight: 500;
+   }
+   
+   .parlour-note {
+     margin-top: 15px;
+     text-align: center;
+   }
+   
+   .parlour-note p {
+     font-size: 0.85rem;
+     color: var(--salon-text-light-subtle);
+     font-style: italic;
+   }
+   
+   /* -------------------------------------------------------------------------
+      11. ACCORDION SYSTEM MODULE (DETAILED FAQ)
+      ------------------------------------------------------------------------- */
+   .salon-faq-accordion-section-block {
+     width: 100%;
+     max-width: 900px;
+     margin: 20px auto 0 auto;
+   }
+   
+   .faq-section-header-alignment {
+     text-align: center;
+     margin-bottom: 45px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+   }
+   
+   .faq-mini-pretitle {
+     font-size: 0.8rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     color: var(--salon-primary-deep-pink);
+     margin-bottom: 12px;
+   }
+   
+   .faq-main-section-title {
+     font-family: 'Playfair Display', serif;
+     font-size: 2.4rem;
+     color: var(--salon-text-primary-dark);
+     font-weight: 700;
+     margin-bottom: 16px;
+   }
+   
+   .horizontal-decorative-divider-bar {
+     width: 60px;
+     height: 3px;
+     background: linear-gradient(90deg, transparent, var(--salon-primary-deep-pink), transparent);
+     border-radius: 50px;
+   }
+   
+   .faq-accordion-structural-container-wrapper {
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+   }
+   
+   /* Individual FAQ Collapsible Row States */
+   .faq-accordion-individual-row-item {
+     background: var(--salon-surface-pure-white);
+     border: 1px solid var(--salon-surface-card-border);
+     border-radius: 20px;
+     overflow: hidden;
+     transition: var(--salon-transition-smooth);
+     box-shadow: var(--salon-shadow-subtle-glow);
+   }
+   
+   .faq-accordion-trigger-button-element {
+     width: 100%;
+     padding: 24px 30px;
+     background: transparent;
+     border: none;
+     font-family: inherit;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     cursor: pointer;
+     text-align: left;
+     gap: 20px;
+   }
+   
+   .faq-question-text-node {
+     font-size: 1.1rem;
+     font-weight: 700;
+     color: var(--salon-text-primary-dark);
+     transition: var(--salon-transition-snappy);
+   }
+   
+   .faq-accordion-plus-minus-cross-indicator {
+     width: 36px;
+     height: 36px;
+     border-radius: 50%;
+     background: var(--salon-bg-canvas);
+     color: var(--salon-primary-deep-pink);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+     transition: var(--salon-transition-smooth);
+   }
+   
+   /* Hidden Inner Panel Layer Animations */
+   .faq-accordion-hidden-collapsible-panel-wrapper {
+     transition: max-height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                 opacity 0.4s ease, 
+                 visibility 0.4s ease;
+   }
+   
+   .faq-accordion-inner-body-padded-content {
+     padding: 0 30px 26px 30px;
+   }
+   
+   .faq-answer-paragraph-render-node {
+     font-size: 0.95rem;
+     line-height: 1.65;
+     color: var(--salon-text-secondary-muted);
+     font-weight: 400;
+   }
+   
+   /* Interactive Open Accordion Component Variations */
+   .accordion-row-state-expanded {
+     border-color: rgba(194, 24, 91, 0.25);
+     box-shadow: var(--salon-shadow-premium-lift);
+     background: var(--salon-surface-pure-white);
+   }
+   
+   .accordion-row-state-expanded .faq-question-text-node {
+     color: var(--salon-primary-deep-pink);
+   }
+   
+   .accordion-row-state-expanded .faq-accordion-plus-minus-cross-indicator {
+     background: var(--salon-primary-deep-pink);
+     color: var(--salon-surface-pure-white);
+     transform: rotate(45deg);
+   }
+   
+   .faq-accordion-individual-row-item:hover {
+     border-color: rgba(194, 24, 91, 0.25);
+     transform: translateY(-2px);
+     box-shadow: 0 12px 25px rgba(194, 24, 91, 0.05);
+   }
+   
+   /* -------------------------------------------------------------------------
+      12. EXPERT WEB LAYOUT MEDIA BREAKPOINTS (1024PX - LAPTOPS/TABLETS)
+      ------------------------------------------------------------------------- */
+   @media (max-width: 1024px) {
+     .salon-ultimate-contact-root {
+       padding: 60px 20px;
+     }
+     
+     .salon-contact-content-canvas {
+       gap: 50px;
+     }
+     
+     .salon-main-display-title {
+       font-size: 2.8rem;
+     }
+     
+     .salon-interactive-dual-grid {
+       grid-template-columns: 1fr; /* Switch double stack layout to unified single row stack */
+       max-width: 650px;
+       margin: 0 auto;
+       border-radius: 32px;
+     }
+     
+     .salon-branding-visual-panel {
+       padding: 50px 40px;
+       min-height: 380px;
+       justify-content: center;
+     }
+     
+     .visual-panel-content-hierarchy {
+       gap: 35px;
+     }
+     
+     .visual-panel-serif-title {
+       font-size: 2.4rem;
+     }
+     
+     .salon-booking-actions-panel {
+       padding: 50px 40px;
+     }
+     
+     .actions-panel-header-title {
+       font-size: 2rem;
+     }
+     
+     .faq-main-section-title {
+       font-size: 2rem;
+     }
+   }
+   
+   /* -------------------------------------------------------------------------
+      13. PRECISION PORTRAIT TABLET BREAKPOINTS (768PX)
+      ------------------------------------------------------------------------- */
+   @media (max-width: 768px) {
+     .salon-main-display-title {
+       font-size: 2.4rem;
+     }
+     
+     .salon-hero-descriptive-para {
+       font-size: 1.05rem;
+     }
+     
+     .faq-accordion-trigger-button-element {
+       padding: 20px 24px;
+     }
+     
+     .faq-accordion-inner-body-padded-content {
+       padding: 0 24px 20px 24px;
+     }
+     
+     .faq-question-text-node {
+       font-size: 1rem;
+     }
+   }
+   
+   /* -------------------------------------------------------------------------
+      14. ULTRA-RESPONSIVE SMARTPHONE MEDIA BREAKPOINTS (480PX & UNDER)
+      ------------------------------------------------------------------------- */
+   @media (max-width: 480px) {
+     .salon-ultimate-contact-root {
+       padding: 40px 14px;
+     }
+     
+     .premium-tagline-capsule {
+       padding: 6px 16px;
+       margin-bottom: 18px;
+     }
+     
+     .tagline-text {
+       font-size: 0.75rem;
+       letter-spacing: 1.5px;
+     }
+     
+     .salon-main-display-title {
+       font-size: 2rem;
+       line-height: 1.2;
+     }
+     
+     .salon-hero-descriptive-para {
+       font-size: 0.95rem;
+       line-height: 1.6;
+     }
+     
+     .salon-interactive-dual-grid {
+       border-radius: 24px;
+     }
+     
+     .salon-branding-visual-panel {
+       padding: 40px 20px;
+       min-height: 320px;
+     }
+     
+     .visual-panel-serif-title {
+       font-size: 1.9rem;
+       line-height: 1.3;
+     }
+     
+     .visual-panel-body-prose {
+       font-size: 0.95rem;
+     }
+     
+     .interactive-branch-subcard-glass {
+       padding: 16px;
+       border-radius: 18px;
+     }
+     
+     .branch-selector-tab-header {
+       margin-bottom: 15px;
+     }
+     
+     .branch-toggle-tab {
+       font-size: 0.75rem;
+       padding: 8px;
+     }
+     
+     .branch-render-title {
+       font-size: 1rem;
+       margin-bottom: 10px;
+     }
+     
+     .branch-meta-text {
+       font-size: 0.8rem;
+     }
+     
+     .salon-booking-actions-panel {
+       padding: 40px 20px;
+     }
+     
+     .actions-panel-header-wrapper {
+       margin-bottom: 25px;
+     }
+     
+     .actions-panel-header-title {
+       font-size: 1.6rem;
+     }
+     
+     .actions-panel-header-subtitle {
+       font-size: 0.85rem;
+     }
+     
+     .custom-beauty-dropdown-container {
+       margin-bottom: 25px;
+     }
+     
+     .custom-dropdown-trigger-field {
+       padding: 14px 18px;
+       border-radius: 12px;
+     }
+     
+     .trigger-selected-display-value {
+       font-size: 0.85rem;
+     }
+     
+     .dropdown-option-row-item {
+       padding: 12px 14px;
+       font-size: 0.85rem;
+     }
+     
+     .salon-premium-action-card-anchor {
+       padding: 20px;
+       border-radius: 18px;
+     }
+     
+     .action-card-icon-outer-ring {
+       width: 52px;
+       height: 52px;
+       border-radius: 14px;
+       margin-right: 14px;
+     }
+     
+     .action-card-icon-inner-fill {
+       width: 40px;
+       height: 40px;
+       border-radius: 10px;
+     }
+     
+     .action-card-icon-inner-fill svg {
+       width: 20px;
+       height: 20px;
+     }
+     
+     .card-main-action-heading {
+       font-size: 1.1rem;
+     }
+     
+     .card-badge-status {
+       font-size: 0.65rem;
+       padding: 2px 8px;
+     }
+     
+     .card-supporting-explanatory-prose {
+       font-size: 0.8rem;
+       line-height: 1.4;
+       margin-bottom: 12px;
+     }
+     
+     .cta-action-text-string {
+       font-size: 0.85rem;
+     }
+     
+     .salon-brand-assurance-footer-notice {
+       margin-top: 25px;
+       padding: 12px 16px;
+       border-radius: 12px;
+       gap: 10px;
+     }
+     
+     .assurance-notice-text-content {
+       font-size: 0.75rem;
+       line-height: 1.4;
+     }
+     
+     .faq-main-section-title {
+       font-size: 1.6rem;
+     }
+     
+     .faq-accordion-trigger-button-element {
+       padding: 16px;
+       gap: 10px;
+     }
+     
+     .faq-question-text-node {
+       font-size: 0.9rem;
+       line-height: 1.4;
+     }
+     
+     .faq-accordion-plus-minus-cross-indicator {
+       width: 28px;
+       height: 28px;
+     }
+     
+     .faq-accordion-inner-body-padded-content {
+       padding: 0 16px 16px 16px;
+     }
+     
+     .faq-answer-paragraph-render-node {
+       font-size: 0.8rem;
+       line-height: 1.5;
+     }
+   }
